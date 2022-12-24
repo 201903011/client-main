@@ -1,4 +1,5 @@
-import { Font, StyleSheet } from '@react-18-pdf/renderer';
+import { Font, StyleSheet } from '@react-pdf/renderer';
+
 // ----------------------------------------------------------------------
 
 Font.register({

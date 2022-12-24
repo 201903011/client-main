@@ -1,10 +1,10 @@
-import PropTypes from "prop-types";
-import { Page, View, Text, Image, Document } from "@react-18-pdf/renderer";
+import PropTypes from 'prop-types';
+import { Page, View, Text, Image, Document } from '@react-pdf/renderer';
 // utils
-import { fCurrency } from "../../../../utils/formatNumber";
-import { fDate } from "../../../../utils/formatTime";
+import { fCurrency } from '../../../../utils/formatNumber';
+import { fDate } from '../../../../utils/formatTime';
 //
-import styles from "./InvoiceStyle";
+import styles from './InvoiceStyle';
 
 // ----------------------------------------------------------------------
 
@@ -32,7 +32,7 @@ export default function InvoicePDF({ invoice }) {
       <Page size="A4" style={styles.page}>
         <View style={[styles.gridContainer, styles.mb40]}>
           <Image source="/logo/logo_full.jpg" style={{ height: 32 }} />
-          <View style={{ alignItems: "flex-end", flexDirection: "column" }}>
+          <View style={{ alignItems: 'flex-end', flexDirection: 'column' }}>
             <Text style={styles.h3}>{status}</Text>
             <Text> {invoiceNumber} </Text>
           </View>
@@ -171,10 +171,7 @@ export default function InvoicePDF({ invoice }) {
         <View style={[styles.gridContainer, styles.footer]}>
           <View style={styles.col8}>
             <Text style={styles.subtitle2}>NOTES</Text>
-            <Text>
-              We appreciate your business. Should you need us to add VAT or
-              extra notes let us know!
-            </Text>
+            <Text>We appreciate your business. Should you need us to add VAT or extra notes let us know!</Text>
           </View>
           <View style={[styles.col4, styles.alignRight]}>
             <Text style={styles.subtitle2}>Have a Question?</Text>

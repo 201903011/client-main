@@ -11,27 +11,28 @@ import { ProgressBarStyle } from './components/ProgressBar';
 import NotistackProvider from './components/NotistackProvider';
 import ThemeColorPresets from './components/ThemeColorPresets';
 import ThemeLocalization from './components/ThemeLocalization';
-import { MotionLazyContainer } from './components/animate';
+import MotionLazyContainer from './components/animate/MotionLazyContainer';
+
+// ----------------------------------------------------------------------
 
 export default function App() {
   return (
-    // <ThemeProvider>
-    //   <ThemeColorPresets>
-    //     <ThemeLocalization>
-    //       <RtlLayout>
-    //         <NotistackProvider>
-    //           <MotionLazyContainer>
-    //             <ProgressBarStyle />
-    //             <ChartStyle />
-    //             <Settings />
-    //             <ScrollToTop />
-    //             <div>hii</div>
-    //           </MotionLazyContainer>
-    //         </NotistackProvider>
-    //       </RtlLayout>
-    //     </ThemeLocalization>
-    //   </ThemeColorPresets>
-    // </ThemeProvider>
-    <div>hiiii</div>
+    <ThemeProvider>
+      <ThemeColorPresets>
+        <ThemeLocalization>
+          <RtlLayout>
+            <NotistackProvider>
+              <MotionLazyContainer>
+                <ProgressBarStyle />
+                <ChartStyle />
+                <Settings />
+                <ScrollToTop />
+                <Router />
+              </MotionLazyContainer>
+            </NotistackProvider>
+          </RtlLayout>
+        </ThemeLocalization>
+      </ThemeColorPresets>
+    </ThemeProvider>
   );
 }

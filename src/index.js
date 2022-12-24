@@ -1,3 +1,6 @@
+// i18n
+import './locales/i18n';
+
 // highlight
 import './utils/highlight';
 
@@ -5,7 +8,7 @@ import './utils/highlight';
 import 'simplebar/src/simplebar.css';
 
 // lightbox
-import 'react-18-image-lightbox/style.css';
+import 'react-image-lightbox/style.css';
 
 // map
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -36,25 +39,35 @@ import { store, persistor } from './redux/store';
 import { SettingsProvider } from './contexts/SettingsContext';
 import { CollapseDrawerProvider } from './contexts/CollapseDrawerContext';
 
+// Check our docs
+// https://docs-minimals.vercel.app/authentication/ts-version
+
 import { AuthProvider } from './contexts/JWTContext';
+// import { AuthProvider } from './contexts/Auth0Context';
+// import { AuthProvider } from './contexts/FirebaseContext';
+// import { AuthProvider } from './contexts/AwsCognitoContext';
 
 //
 import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 
+// ----------------------------------------------------------------------
+
 ReactDOM.render(
   <AuthProvider>
     <HelmetProvider>
       <ReduxProvider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <SettingsProvider>
-            <CollapseDrawerProvider>
-              <BrowserRouter>
-                <App />
-              </BrowserRouter>
-            </CollapseDrawerProvider>
-          </SettingsProvider>
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <SettingsProvider>
+              <CollapseDrawerProvider>
+                <BrowserRouter>
+                  <App />
+                </BrowserRouter>
+              </CollapseDrawerProvider>
+            </SettingsProvider>
+          </LocalizationProvider>
         </PersistGate>
       </ReduxProvider>
     </HelmetProvider>

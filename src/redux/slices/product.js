@@ -8,29 +8,7 @@ import { dispatch } from '../store';
 
 // ----------------------------------------------------------------------
 
-const initialState = {
-  isLoading: false,
-  error: null,
-  products: [],
-  product: null,
-  sortBy: null,
-  filters: {
-    gender: [],
-    category: 'All',
-    colors: [],
-    priceRange: '',
-    rating: '',
-  },
-  checkout: {
-    activeStep: 0,
-    cart: [],
-    subtotal: 0,
-    total: 0,
-    discount: 0,
-    shipping: 0,
-    billing: null,
-  },
-};
+const initialState = {};
 
 const slice = createSlice({
   name: 'product',
@@ -45,18 +23,6 @@ const slice = createSlice({
     hasError(state, action) {
       state.isLoading = false;
       state.error = action.payload;
-    },
-
-    // GET PRODUCTS
-    getProductsSuccess(state, action) {
-      state.isLoading = false;
-      state.products = action.payload;
-    },
-
-    // GET PRODUCT
-    getProductSuccess(state, action) {
-      state.isLoading = false;
-      state.product = action.payload;
     },
 
     //  SORT & FILTER PRODUCTS

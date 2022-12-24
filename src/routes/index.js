@@ -12,6 +12,7 @@ import AuthGuard from '../guards/AuthGuard';
 import { PATH_AFTER_LOGIN } from '../config';
 // components
 import LoadingScreen from '../components/LoadingScreen';
+import AppLayout from '../layouts/app';
 
 // ----------------------------------------------------------------------
 
@@ -20,7 +21,7 @@ const Loadable = (Component) => (props) => {
   const { pathname } = useLocation();
 
   return (
-    <Suspense fallback={<LoadingScreen isDashboard={pathname.includes('/dashboard')} />}>
+    <Suspense fallback={<LoadingScreen isDashboard={pathname.includes('/lmsapp')} />}>
       <Component {...props} />
     </Suspense>
   );
@@ -40,6 +41,14 @@ export default function Router() {
           ),
         },
         {
+          path: 'loginadmin',
+          element: (
+            <GuestGuard>
+              <LoginAdmin />
+            </GuestGuard>
+          ),
+        },
+        {
           path: 'register',
           element: (
             <GuestGuard>
@@ -51,6 +60,38 @@ export default function Router() {
         { path: 'register-unprotected', element: <Register /> },
         { path: 'reset-password', element: <ResetPassword /> },
         { path: 'verify', element: <VerifyCode /> },
+      ],
+    },
+
+    // Main PAge Routes
+    {
+      path: 'lmsapp',
+      element: (
+        <AuthGuard>
+          <AppLayout />
+        </AuthGuard>
+      ),
+      children: [
+        { element: <Navigate to={PATH_AFTER_LOGIN} replace />, index: true },
+        { path: 'app', element: <Element /> },
+        { path: 'ecommerce', element: <GeneralEcommerce /> },
+        { path: 'analytics', element: <GeneralAnalytics /> },
+        { path: 'banking', element: <GeneralBanking /> },
+        { path: 'booking', element: <GeneralBooking /> },
+        {
+          path: 'user',
+          children: [
+            { element: <Navigate to="/lmsapp/user/profile" replace />, index: true },
+            { path: 'profile', element: <AppUserProfile /> },
+            { path: 'cards', element: <AppUserCards /> },
+            { path: 'list', element: <AppUserList /> },
+            { path: 'new', element: <AppUserCreate /> },
+            { path: ':name/edit', element: <AppUserCreate /> },
+            { path: 'account', element: <AppUserAccount /> },
+          ],
+        },
+        { path: 'calendar', element: <Calendar /> },
+        { path: 'kanban', element: <Kanban /> },
       ],
     },
 
@@ -166,9 +207,24 @@ export default function Router() {
 
 // AUTHENTICATION
 const Login = Loadable(lazy(() => import('../pages/auth/Login')));
+const LoginAdmin = Loadable(lazy(() => import('../pages/auth/LoginAdmin')));
 const Register = Loadable(lazy(() => import('../pages/auth/Register')));
 const ResetPassword = Loadable(lazy(() => import('../pages/auth/ResetPassword')));
 const VerifyCode = Loadable(lazy(() => import('../pages/auth/VerifyCode')));
+
+// LMSAPP
+
+// GENERAL
+
+// USER
+// APP USER
+
+const Element = Loadable(lazy(() => import('../pages/lmsapp/Books')));
+const AppUserProfile = Loadable(lazy(() => import('../pages/dashboard/UserProfile')));
+const AppUserCards = Loadable(lazy(() => import('../pages/dashboard/UserCards')));
+const AppUserList = Loadable(lazy(() => import('../pages/dashboard/UserList')));
+const AppUserAccount = Loadable(lazy(() => import('../pages/dashboard/UserAccount')));
+const AppUserCreate = Loadable(lazy(() => import('../pages/dashboard/UserCreate')));
 
 // DASHBOARD
 

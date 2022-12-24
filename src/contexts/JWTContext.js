@@ -31,6 +31,15 @@ const handlers = {
       user,
     };
   },
+  LOGINADMIN: (state, action) => {
+    const { user } = action.payload;
+
+    return {
+      ...state,
+      isAuthenticated: true,
+      user,
+    };
+  },
   LOGOUT: (state) => ({
     ...state,
     isAuthenticated: false,
@@ -53,6 +62,7 @@ const AuthContext = createContext({
   ...initialState,
   method: 'jwt',
   login: () => Promise.resolve(),
+  loginadmin: () => Promise.resolve(),
   logout: () => Promise.resolve(),
   register: () => Promise.resolve(),
 });
@@ -124,6 +134,24 @@ function AuthProvider({ children }) {
     });
   };
 
+  const loginadmin = async (email, password) => {
+    console.log('exee');
+    const response = await axios.post('/api/account/login', {
+      email,
+      password,
+    });
+
+    const { accessToken, user } = response.data;
+
+    setSession(accessToken);
+    dispatch({
+      type: 'LOGINADMIN',
+      payload: {
+        user,
+      },
+    });
+  };
+
   const register = async (email, password, firstName, lastName) => {
     const response = await axios.post('/api/account/register', {
       email,
@@ -153,6 +181,7 @@ function AuthProvider({ children }) {
         ...state,
         method: 'jwt',
         login,
+        loginadmin,
         logout,
         register,
       }}

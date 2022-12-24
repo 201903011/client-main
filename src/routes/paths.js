@@ -6,6 +6,7 @@ function path(root, sublink) {
 
 const ROOTS_AUTH = '/auth';
 const ROOTS_DASHBOARD = '/dashboard';
+const ROOTS_APP = '/lmsapp';
 
 // ----------------------------------------------------------------------
 
@@ -30,6 +31,27 @@ export const PATH_PAGE = {
   page404: '/404',
   page500: '/500',
   components: '/components',
+};
+
+export const PATH_APP = {
+  root: ROOTS_APP,
+  general: {
+    app: path(ROOTS_APP, '/app'),
+    ecommerce: path(ROOTS_APP, '/ecommerce'),
+    analytics: path(ROOTS_APP, '/analytics'),
+    banking: path(ROOTS_APP, '/banking'),
+    booking: path(ROOTS_APP, '/booking'),
+  },
+  user: {
+    root: path(ROOTS_APP, '/user'),
+    new: path(ROOTS_APP, '/user/new'),
+    list: path(ROOTS_APP, '/user/list'),
+    cards: path(ROOTS_APP, '/user/cards'),
+    profile: path(ROOTS_APP, '/user/profile'),
+    account: path(ROOTS_APP, '/user/account'),
+    edit: (name) => path(ROOTS_APP, `/user/${name}/edit`),
+    demoEdit: path(ROOTS_APP, `/user/reece-chung/edit`),
+  },
 };
 
 export const PATH_DASHBOARD = {
