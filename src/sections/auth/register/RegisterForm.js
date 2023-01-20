@@ -4,16 +4,28 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
-import { Stack, IconButton, InputAdornment, Alert } from '@mui/material';
+import { Stack, IconButton, InputAdornment, Alert, Select, MenuItem } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 // hooks
 import useAuth from '../../../hooks/useAuth';
 import useIsMountedRef from '../../../hooks/useIsMountedRef';
 // components
 import Iconify from '../../../components/Iconify';
-import { FormProvider, RHFTextField } from '../../../components/hook-form';
+import { FormProvider, RHFSelect, RHFTextField } from '../../../components/hook-form';
 
 // ----------------------------------------------------------------------
+export const department = [
+  { code: 'COMPS', label: 'COMPS' },
+  { code: 'IT', label: 'IT' },
+  { code: 'EXTC', label: 'EXTC' },
+];
+
+export const studyyear = [
+  { code: 'FE', label: 'First Year' },
+  { code: 'SE', label: 'Second Year' },
+  { code: 'TE', label: 'Third Year' },
+  { code: 'BE', label: 'Fourth Year' },
+];
 
 export default function RegisterForm() {
   const { register } = useAuth();
@@ -24,15 +36,33 @@ export default function RegisterForm() {
 
   const RegisterSchema = Yup.object().shape({
     firstName: Yup.string().required('First name required'),
+    midName: Yup.string().required('Middle name required'),
     lastName: Yup.string().required('Last name required'),
+    grno: Yup.string().required('XIEID is required'),
     email: Yup.string().email('Email must be a valid email address').required('Email is required'),
+    phone: Yup.number()
+      .typeError("That doesn't look like a phone number")
+      .positive("A phone number can't start with a minus")
+      .integer("A phone number can't include a decimal point")
+      .min(1000000000)
+      .max(9999999999)
+      .required('phone number is required'),
+    address: Yup.string().required('Address required'),
+    dept: Yup.string().required('Department required'),
+    year: Yup.string().required('Year required'),
     password: Yup.string().required('Password is required'),
   });
 
   const defaultValues = {
     firstName: '',
+    midName: '',
     lastName: '',
     email: '',
+    grno: '',
+    phone: 0,
+    address: '',
+    dept: '',
+    year: '',
     password: '',
   };
 
@@ -51,7 +81,18 @@ export default function RegisterForm() {
 
   const onSubmit = async (data) => {
     try {
-      await register(data.email, data.password, data.firstName, data.lastName);
+      await register(
+        data.email,
+        data.password,
+        data.firstName,
+        data.lastName,
+        data.midName,
+        data.phone,
+        data.address,
+        data.dept,
+        data.year,
+        data.grno
+      );
     } catch (error) {
       console.error(error);
       reset();
@@ -68,10 +109,37 @@ export default function RegisterForm() {
 
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
           <RHFTextField name="firstName" label="First name" />
+          <RHFTextField name="midName" label="Middle name" />
           <RHFTextField name="lastName" label="Last name" />
         </Stack>
 
         <RHFTextField name="email" label="Email address" />
+
+        <RHFTextField name="phone" type="number" label="Phone no" />
+
+        <RHFTextField name="address" type="text" label="Address" />
+
+        <RHFTextField name="grno" label="XIE ID" />
+
+        <RHFSelect name="dept" label="Department">
+          <option value="" />
+          {department.map((option) => (
+            <option key={option.code} value={option.label}>
+              {option.label}
+            </option>
+          ))}
+          <MenuItem value={'COMPS'}>COMPS</MenuItem>
+        </RHFSelect>
+
+        <RHFSelect name="year" label="Year">
+          <option value="" />
+          {studyyear.map((option) => (
+            <option key={option.code} value={option.label}>
+              {option.label}
+            </option>
+          ))}
+          <MenuItem value={'COMPS'}>COMPS</MenuItem>
+        </RHFSelect>
 
         <RHFTextField
           name="password"

@@ -73,7 +73,7 @@ export default function Router() {
       ),
       children: [
         { element: <Navigate to={PATH_AFTER_LOGIN} replace />, index: true },
-        { path: 'app', element: <Element /> },
+        { path: 'app', element: <BookList /> },
         { path: 'ecommerce', element: <GeneralEcommerce /> },
         { path: 'analytics', element: <GeneralAnalytics /> },
         { path: 'banking', element: <GeneralBanking /> },
@@ -219,7 +219,7 @@ const VerifyCode = Loadable(lazy(() => import('../pages/auth/VerifyCode')));
 // USER
 // APP USER
 
-const Element = Loadable(lazy(() => import('../pages/lmsapp/Books')));
+const BookList = Loadable(lazy(() => import('../pages/lmsapp/BookList')));
 const AppUserProfile = Loadable(lazy(() => import('../pages/dashboard/UserProfile')));
 const AppUserCards = Loadable(lazy(() => import('../pages/dashboard/UserCards')));
 const AppUserList = Loadable(lazy(() => import('../pages/dashboard/UserList')));

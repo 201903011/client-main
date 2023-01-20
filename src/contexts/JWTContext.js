@@ -1,7 +1,7 @@
 import { createContext, useEffect, useReducer } from 'react';
 import PropTypes from 'prop-types';
 // utils
-import axios from '../utils/axios';
+import axios from 'axios';
 import { isValidToken, setSession } from '../utils/jwt';
 
 // ----------------------------------------------------------------------
@@ -84,14 +84,16 @@ function AuthProvider({ children }) {
         if (accessToken && isValidToken(accessToken)) {
           setSession(accessToken);
 
-          const response = await axios.get('/api/account/my-account');
-          const { user } = response.data;
+          const response = await axios.post(`${process.env.REACT_APP_HOST_API_KEY}/api/user/student/get-student-info`, {
+            jwtEncodedStudent: accessToken,
+          });
+          const { student } = response.data;
 
           dispatch({
             type: 'INITIALIZE',
             payload: {
               isAuthenticated: true,
-              user,
+              student,
             },
           });
         } else {
@@ -99,7 +101,7 @@ function AuthProvider({ children }) {
             type: 'INITIALIZE',
             payload: {
               isAuthenticated: false,
-              user: null,
+              student: null,
             },
           });
         }
@@ -119,31 +121,36 @@ function AuthProvider({ children }) {
   }, []);
 
   const login = async (email, password) => {
-    const response = await axios.post('/api/account/login', {
+    const response = await axios.post(`${process.env.REACT_APP_HOST_API_KEY}/api/user/student/signin`, {
       email,
       password,
     });
-    const { accessToken, user } = response.data;
+    const { token } = response.data;
 
-    setSession(accessToken);
+    const re = await axios.post(`${process.env.REACT_APP_HOST_API_KEY}/api/user/student/get-student-info`, {
+      jwtEncodedStudent: token,
+    });
+    const { student } = re.data;
+    console.log(student);
+    window.localStorage.setItem('accessToken', token);
     dispatch({
       type: 'LOGIN',
       payload: {
-        user,
+        student,
       },
     });
   };
 
   const loginadmin = async (email, password) => {
     console.log('exee');
-    const response = await axios.post('/api/account/login', {
+    const response = await axios.post(`${process.env.REACT_APP_HOST_API_KEY}/api/user/student/signin`, {
       email,
       password,
     });
+    console.log(response.data);
+    const { token, user } = response.data;
 
-    const { accessToken, user } = response.data;
-
-    setSession(accessToken);
+    window.localStorage.setItem('accessToken', token);
     dispatch({
       type: 'LOGINADMIN',
       payload: {
@@ -152,20 +159,35 @@ function AuthProvider({ children }) {
     });
   };
 
-  const register = async (email, password, firstName, lastName) => {
-    const response = await axios.post('/api/account/register', {
-      email,
-      password,
-      firstName,
-      lastName,
+  const register = async (email, password, firstName, lastName, midname, phone, address, dept, year, grno) => {
+    const response = await axios.post(`${process.env.REACT_APP_HOST_API_KEY}/api/user/student/create-student`, {
+      email: email.toString(),
+      password: password.toString(),
+      name: `${firstName.toString()} ${midname.toString()} ${lastName.toString()} `,
+      address: address.toString(),
+      phone_number: phone.toString(),
+      grno: grno.toString(),
+      dept: dept.toString(),
+      year: year.toString(),
+      profile_picture: firstName.toString(),
     });
-    const { accessToken, user } = response.data;
 
-    window.localStorage.setItem('accessToken', accessToken);
+    const resp = await axios.post(`${process.env.REACT_APP_HOST_API_KEY}/api/user/student/signin`, {
+      email: email.toString(),
+      password: password.toString(),
+    });
+    const { token } = resp.data;
+
+    const re = await axios.post(`${process.env.REACT_APP_HOST_API_KEY}/api/user/student/get-student-info`, {
+      jwtEncodedStudent: token,
+    });
+    const { student } = re.data;
+
+    window.localStorage.setItem('accessToken', token);
     dispatch({
       type: 'REGISTER',
       payload: {
-        user,
+        student,
       },
     });
   };

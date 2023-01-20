@@ -19,7 +19,7 @@ import { FormProvider, RHFTextField, RHFCheckbox } from '../../../components/hoo
 // ----------------------------------------------------------------------
 
 export default function LoginForm() {
-  const { loginadmin } = useAuth();
+  const { login } = useAuth();
 
   const isMountedRef = useIsMountedRef();
 
@@ -50,7 +50,7 @@ export default function LoginForm() {
 
   const onSubmit = async (data) => {
     try {
-      await loginadmin(data.email, data.password);
+      await login(data.email, data.password);
     } catch (error) {
       console.error(error);
       reset();

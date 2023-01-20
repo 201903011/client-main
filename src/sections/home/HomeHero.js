@@ -4,7 +4,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import { Button, Box, Link, Container, Typography, Stack } from '@mui/material';
 // routes
-import { PATH_DASHBOARD } from '../../routes/paths';
+import { PATH_DASHBOARD, PATH_APP } from '../../routes/paths';
 // components
 import Image from '../../components/Image';
 import Iconify from '../../components/Iconify';
@@ -70,11 +70,11 @@ export default function HomeHero() {
   return (
     <MotionContainer>
       <RootStyle>
-        <HeroOverlayStyle
+        {/* <HeroOverlayStyle
           alt="overlay"
           src="https://minimal-assets-api.vercel.app/assets/overlay.svg"
           variants={varFade().in}
-        />
+        /> */}
 
         <HeroImgStyle
           alt="hero"
@@ -87,21 +87,28 @@ export default function HomeHero() {
             <m.div variants={varFade().inRight}>
               <Typography variant="h1" sx={{ color: 'common.white' }}>
                 Start a <br />
-                new project <br /> with
+                new journey <br /> with
                 <Typography component="span" variant="h1" sx={{ color: 'primary.main' }}>
-                  &nbsp;Minimal
+                  &nbsp;Knowza
                 </Typography>
               </Typography>
             </m.div>
 
             <m.div variants={varFade().inRight}>
               <Typography sx={{ color: 'common.white' }}>
-                The starting point for your next project based on easy-to-customize MUI helps you build apps faster and
-                better.
+                “If this nation is to be wise as well as strong, if we are to achieve our destiny, then we need more new
+                ideas for more wise men reading more good books in more public libraries. These libraries should be open
+                to all—except the censor. We must know all the facts and hear all the alternatives and listen to all the
+                criticisms. Let us welcome controversial books and controversial authors. For the Bill of Rights is the
+                guardian of our security as well as our liberty.
+                <br />
+                <Typography component="span" sx={{ color: 'primary.main' }}>
+                  ― John F. Kennedy
+                </Typography>
               </Typography>
             </m.div>
 
-            <Stack spacing={2.5} alignItems="center" direction={{ xs: 'column', md: 'row' }}>
+            {/* <Stack spacing={2.5} alignItems="center" direction={{ xs: 'column', md: 'row' }}>
               <m.div variants={varFade().inRight}>
                 <TextIconLabel
                   icon={
@@ -147,21 +154,21 @@ export default function HomeHero() {
                   }
                 />
               </m.div>
-            </Stack>
+            </Stack> */}
 
             <m.div variants={varFade().inRight}>
               <Button
                 size="large"
                 variant="contained"
                 component={RouterLink}
-                to={PATH_DASHBOARD.root}
+                to={PATH_APP.root}
                 startIcon={<Iconify icon={'eva:flash-fill'} width={20} height={20} />}
               >
-                Live Preview
+                Get Started
               </Button>
             </m.div>
 
-            <Stack spacing={2.5}>
+            {/* <Stack spacing={2.5}>
               <m.div variants={varFade().inRight}>
                 <Typography variant="overline" sx={{ color: 'primary.light' }}>
                   Available For
@@ -177,7 +184,7 @@ export default function HomeHero() {
                   />
                 ))}
               </Stack>
-            </Stack>
+            </Stack> */}
           </ContentStyle>
         </Container>
       </RootStyle>

@@ -57,11 +57,11 @@ const menuConfig = [
       },
     ],
   },
-  {
-    title: 'Documentation',
-    icon: <Iconify icon={'eva:book-open-fill'} {...ICON_SIZE} />,
-    path: PATH_DOCS,
-  },
+  // {
+  //   title: 'Documentation',
+  //   icon: <Iconify icon={'eva:book-open-fill'} {...ICON_SIZE} />,
+  //   path: PATH_DOCS,
+  // },
 ];
 
 export default menuConfig;

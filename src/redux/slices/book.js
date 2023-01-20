@@ -30,7 +30,7 @@ const slice = createSlice({
     // GET BOOKS
     getBooks(state, action) {
       state.isLoading = false;
-      state.events = action.payload;
+      state.books = action.payload;
     },
 
     // CREATE EVENT
@@ -65,10 +65,12 @@ export const { getBooks, updateBooks, createBooks } = slice.actions;
 // ----------------------------------------------------------------------
 
 export function getBookslist() {
+  console.log('hiii');
   return async () => {
     dispatch(slice.actions.startLoading());
     try {
-      const response = await axios.get('/api/calendar/events');
+      const response = await axios.get(`${process.env.REACT_APP_HOST_API_KEY}/api/user/books/get-books?page=1`);
+      console.log(response.data);
       dispatch(slice.actions.getBooks(response.data.books));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
