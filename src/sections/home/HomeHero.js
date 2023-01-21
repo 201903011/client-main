@@ -12,7 +12,7 @@ import TextIconLabel from '../../components/TextIconLabel';
 import { MotionContainer, varFade } from '../../components/animate';
 
 // ----------------------------------------------------------------------
-
+import logo from '../../assets/hero.png'
 const RootStyle = styled(m.div)(({ theme }) => ({
   position: 'relative',
   backgroundColor: theme.palette.grey[400],
@@ -76,11 +76,7 @@ export default function HomeHero() {
           variants={varFade().in}
         /> */}
 
-        <HeroImgStyle
-          alt="hero"
-          src="https://minimal-assets-api.vercel.app/assets/images/home/hero.png"
-          variants={varFade().inUp}
-        />
+        <HeroImgStyle alt="hero" src="" variants={varFade().inUp} />
 
         <Container>
           <ContentStyle>

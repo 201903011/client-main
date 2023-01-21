@@ -128,8 +128,7 @@ function MenuMobileItem({ item, isOpen, onOpen }) {
                   backgroundPosition: 'center',
                   bgcolor: 'background.neutral',
                   backgroundRepeat: 'no-repeat',
-                  backgroundImage:
-                    'url(https://minimal-assets-api.vercel.app/assets/illustrations/illustration_dashboard.png)',
+                  backgroundImage: 'url(https://minimals.cc/assets/illustrations/illustration_dashboard.png)',
                   '& > *:not(.MuiTouchRipple-root)': { display: 'none' },
                 },
               }}
