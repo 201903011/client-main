@@ -1,4 +1,5 @@
 // @mui
+import { Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
 // components
 import Page from '../components/Page';
@@ -47,7 +48,9 @@ export default function HomePage() {
 
           <HomePricingPlans /> */}
 
-          <HomeLookingFor />
+          {/* <HomeLookingFor /> */}
+
+          <Box height={100} />
 
           <HomeAdvertisement />
         </ContentStyle>

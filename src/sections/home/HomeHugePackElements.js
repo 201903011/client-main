@@ -87,14 +87,14 @@ export default function HomeHugePackElements() {
             <ContentStyle>
               <m.div variants={varFade().inUp}>
                 <Typography component="div" variant="overline" sx={{ mb: 2, color: 'text.disabled' }}>
-                  Interface Starter Kit
+                  Progressive Web App
                 </Typography>
               </m.div>
 
               <m.div variants={varFade().inUp}>
                 <Typography variant="h2" sx={{ mb: 3 }}>
-                  Huge pack <br />
-                  of elements
+                  PWA of <br />
+                  Knowza
                 </Typography>
               </m.div>
 
@@ -105,7 +105,7 @@ export default function HomeHugePackElements() {
                     color: isLight ? 'text.secondary' : 'common.white',
                   }}
                 >
-                  We collected most popular elements. Menu, sliders, buttons, inputs etc. are all here. Just dive in!
+                  We providing PWA for good performance in poor network conditions. And to reduce size.
                 </Typography>
               </m.div>
 
@@ -116,9 +116,9 @@ export default function HomeHugePackElements() {
                   variant="outlined"
                   target="_blank"
                   rel="noopener"
-                  href="https://www.minimals.cc/components/"
+                  // href="https://www.minimals.cc/components/"
                 >
-                  View All Components
+                  Add to Home Screen
                 </Button>
               </m.div>
             </ContentStyle>
