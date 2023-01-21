@@ -41,11 +41,11 @@ export default function HomePage() {
 
           <HomeDarkMode />
 
-          <HomeColorPresets />
+          {/* <HomeColorPresets />
 
           <HomeCleanInterfaces />
 
-          <HomePricingPlans />
+          <HomePricingPlans /> */}
 
           <HomeLookingFor />
 

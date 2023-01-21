@@ -162,9 +162,9 @@ export default function HomeHugePackElements() {
                   <Image
                     disabledEffect
                     alt={`screen ${index + 1}`}
-                    src={`https://minimal-assets-api.vercel.app/assets/images/home/screen_${
+                    src={`https://raw.githubusercontent.com/201903011/assets/master/screen_${
                       isLight ? 'light' : 'dark'
-                    }_${index + 1}.png`}
+                    }_${index + 1}.PNG`}
                   />
                 </ScreenStyle>
               ))}
