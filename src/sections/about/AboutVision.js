@@ -18,12 +18,16 @@ export default function AboutVision() {
           overflow: 'hidden',
         }}
       >
-        <Image
+        {/* <Image
           src="https://minimal-assets-api.vercel.app/assets/images/about/vision.jpg"
           alt="about-vision"
           effect="black-and-white"
+        /> */}
+        <Image
+          src="https://raw.githubusercontent.com/201903011/assets/master/xie.png"
+          alt="about-vision"
+          effect="black-and-white"
         />
-
         <Box
           sx={{
             bottom: { xs: 24, md: 80 },
@@ -54,7 +58,8 @@ export default function AboutVision() {
         <Grid item xs={12} sm={8}>
           <m.div variants={varFade().inUp}>
             <Typography variant="h3" sx={{ textAlign: 'center' }}>
-              Our vision offering the best product nulla vehicula tortor scelerisque ultrices malesuada.
+              Our visione of this project is to digitalize the library management. This application is cross platform so
+              that regardless of the user’s preferred OS the application can be successfully consumed.
             </Typography>
           </m.div>
         </Grid>

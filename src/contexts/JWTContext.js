@@ -84,16 +84,26 @@ function AuthProvider({ children }) {
         if (accessToken && isValidToken(accessToken)) {
           setSession(accessToken);
 
-          const response = await axios.post(`${process.env.REACT_APP_HOST_API_KEY}/api/user/student/get-student-info`, {
-            jwtEncodedStudent: accessToken,
-          });
-          const { student } = response.data;
+          const response = await axios.post(
+            `${process.env.REACT_APP_HOST_API_KEY}/api/user/student/get-student-info`,
 
+            {
+              jwtEncodedStudent: accessToken,
+            },
+            {
+              headers: {
+                authorization: `Bearer ${accessToken}`,
+                'Content-type': 'application/json',
+              },
+            }
+          );
+          const { student } = response.data;
+          // console.log(student);
           dispatch({
             type: 'INITIALIZE',
             payload: {
               isAuthenticated: true,
-              student,
+              user: student,
             },
           });
         } else {
@@ -101,7 +111,7 @@ function AuthProvider({ children }) {
             type: 'INITIALIZE',
             payload: {
               isAuthenticated: false,
-              student: null,
+              user: null,
             },
           });
         }
@@ -127,16 +137,27 @@ function AuthProvider({ children }) {
     });
     const { token } = response.data;
 
-    const re = await axios.post(`${process.env.REACT_APP_HOST_API_KEY}/api/user/student/get-student-info`, {
-      jwtEncodedStudent: token,
-    });
+    window.localStorage.setItem('accessToken', token);
+
+    const re = await axios.post(
+      `${process.env.REACT_APP_HOST_API_KEY}/api/user/student/get-student-info`,
+      {
+        jwtEncodedStudent: token,
+      },
+      {
+        headers: {
+          authorization: `Bearer ${token}`,
+          'Content-type': 'application/json',
+        },
+      }
+    );
     const { student } = re.data;
     console.log(student);
-    window.localStorage.setItem('accessToken', token);
+
     dispatch({
       type: 'LOGIN',
       payload: {
-        student,
+        user: student,
       },
     });
   };
@@ -177,17 +198,26 @@ function AuthProvider({ children }) {
       password: password.toString(),
     });
     const { token } = resp.data;
+    window.localStorage.setItem('accessToken', token);
+    const re = await axios.post(
+      `${process.env.REACT_APP_HOST_API_KEY}/api/user/student/get-student-info`,
 
-    const re = await axios.post(`${process.env.REACT_APP_HOST_API_KEY}/api/user/student/get-student-info`, {
-      jwtEncodedStudent: token,
-    });
+      {
+        jwtEncodedStudent: token,
+      },
+      {
+        headers: {
+          authorization: `Bearer ${token}`,
+          'Content-type': 'application/json',
+        },
+      }
+    );
     const { student } = re.data;
 
-    window.localStorage.setItem('accessToken', token);
     dispatch({
       type: 'REGISTER',
       payload: {
-        student,
+        user: student,
       },
     });
   };

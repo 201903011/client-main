@@ -1,6 +1,6 @@
 import { m } from 'framer-motion';
 // @mui
-import { styled } from '@mui/material/styles';
+import { alpha, styled, useTheme } from '@mui/material/styles';
 import { Box, Container, Typography, Grid } from '@mui/material';
 //
 import { TextAnimate, MotionContainer, varFade } from '../../components/animate';
@@ -33,8 +33,10 @@ const CONTACTS = [
 const RootStyle = styled('div')(({ theme }) => ({
   backgroundSize: 'cover',
   backgroundPosition: 'center',
-  backgroundImage:
-    'url(https://minimal-assets-api.vercel.app/assets/overlay.svg), url(https://minimal-assets-api.vercel.app/assets/images/contact/hero.jpg)',
+  backgroundImage: `linear-gradient(to right, ${alpha(theme.palette.grey[900], 0.8)} , ${alpha(
+    theme.palette.grey[900],
+    0.8
+  )}),url(https://minimal-assets-api.vercel.app/assets/overlay.svg), url(https://minimal-assets-api.vercel.app/assets/images/contact/hero.jpg)`,
   padding: theme.spacing(10, 0),
   [theme.breakpoints.up('md')]: {
     height: 560,

@@ -8,7 +8,7 @@ import useResponsive from '../../hooks/useResponsive';
 // utils
 import { fPercent } from '../../utils/formatNumber';
 // _mock_
-import { _skills } from '../../_mock';
+// import { _skills } from '../../_mock';
 // components
 import Image from '../../components/Image';
 import Iconify from '../../components/Iconify';
@@ -35,6 +35,12 @@ export default function AboutWhat() {
   const isLight = theme.palette.mode === 'light';
 
   const shadow = `-40px 40px 80px ${alpha(isLight ? theme.palette.grey[500] : theme.palette.common.black, 0.48)}`;
+
+  const _skills = [
+    { label: 'Maintainace', value: 80 },
+    { label: 'Design', value: 95 },
+    { label: 'Performance', value: 94 },
+  ];
 
   return (
     <RootStyle>
@@ -73,7 +79,7 @@ export default function AboutWhat() {
           <Grid item xs={12} md={6} lg={5}>
             <m.div variants={varFade().inRight}>
               <Typography variant="h2" sx={{ mb: 3 }}>
-                What is minimal?
+                What is Knowza.io ?
               </Typography>
             </m.div>
 
@@ -83,10 +89,10 @@ export default function AboutWhat() {
                   color: (theme) => (theme.palette.mode === 'light' ? 'text.secondary' : 'common.white'),
                 }}
               >
-                Our theme is the most advanced and user-friendly theme you will find on the market, we have
-                documentation and video to help set your site really easily, pre-installed demos you can import in one
-                click and everything from the theme options to page content can be edited from the front-end. This is
-                the theme you are looking for.
+                Knowza.io is advanced web application which support on any platform. Build an all-in-one place web app
+                to provide all the info for regarding the books in the library. Functionalities like books
+                notifications, recommendations, books availability. Vision to create a web app that will be used by our
+                own college to move from the pen paper era towards the digital domain.
               </Typography>
             </m.div>
 
@@ -98,7 +104,7 @@ export default function AboutWhat() {
               ))}
             </Box>
 
-            <m.div variants={varFade().inRight}>
+            {/* <m.div variants={varFade().inRight}>
               <Button
                 variant="outlined"
                 color="inherit"
@@ -107,7 +113,7 @@ export default function AboutWhat() {
               >
                 Check out our work
               </Button>
-            </m.div>
+            </m.div> */}
           </Grid>
         </Grid>
       </Container>

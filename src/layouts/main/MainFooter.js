@@ -12,7 +12,7 @@ import SocialsButton from '../../components/SocialsButton';
 
 const LINKS = [
   {
-    headline: 'Minimal',
+    headline: 'Knowza',
     children: [
       { name: 'About us', href: PATH_PAGE.about },
       { name: 'Contact us', href: PATH_PAGE.contact },
@@ -30,7 +30,7 @@ const LINKS = [
     headline: 'Contact',
     children: [
       { name: 'support@knwoza.io', href: '#' },
-      { name: 'Los Angeles, 359  Hidden Valley Road', href: '#' },
+      { name: 'Xavier Institue of engineering, Mahim  33', href: '#' },
     ],
   },
 ];
@@ -57,8 +57,8 @@ export default function MainFooter() {
           </Grid>
           <Grid item xs={8} md={3}>
             <Typography variant="body2" sx={{ pr: { md: 5 } }}>
-              The starting point for your next project with Minimal UI Kit, built on the newest version of Material-UI
-              ©, ready to be customized to your style.
+              The starting point for your new journey with knowza.io , use the advanced features of Knowza.io ©, ready
+              to enter into world of books.
             </Typography>
 
             <Stack

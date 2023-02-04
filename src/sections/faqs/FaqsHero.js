@@ -1,6 +1,6 @@
 import { m } from 'framer-motion';
 // @mui
-import { styled } from '@mui/material/styles';
+import { alpha, styled } from '@mui/material/styles';
 import { Box, Container, Stack, InputAdornment } from '@mui/material';
 // components
 import Iconify from '../../components/Iconify';
@@ -11,8 +11,10 @@ import { MotionContainer, TextAnimate, varFade } from '../../components/animate'
 
 const RootStyle = styled('div')(({ theme }) => ({
   backgroundSize: 'cover',
-  backgroundImage:
-    'url(https://minimal-assets-api.vercel.app/assets/overlay.svg), url(https://minimal-assets-api.vercel.app/assets/images/faqs/hero.jpg)',
+  backgroundImage: `linear-gradient(to right, ${alpha(theme.palette.grey[900], 0.8)} , ${alpha(
+    theme.palette.grey[900],
+    0.8
+  )}),url(https://minimal-assets-api.vercel.app/assets/overlay.svg), url(https://minimal-assets-api.vercel.app/assets/images/faqs/hero.jpg)`,
   padding: theme.spacing(10, 0),
   [theme.breakpoints.up('md')]: {
     height: 560,

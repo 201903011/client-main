@@ -48,7 +48,7 @@ ProfileCover.propTypes = {
 export default function ProfileCover({ myProfile }) {
   const { user } = useAuth();
 
-  const { position, cover } = myProfile;
+  const { cover } = myProfile;
 
   return (
     <RootStyle>
@@ -71,8 +71,10 @@ export default function ProfileCover({ myProfile }) {
             textAlign: { xs: 'center', md: 'left' },
           }}
         >
-          <Typography variant="h4">{user?.displayName}</Typography>
-          <Typography sx={{ opacity: 0.72 }}>{position}</Typography>
+          <Typography variant="h4">{user?.name}</Typography>
+          <Typography sx={{ opacity: 0.72 }}>
+            {user.year} {user.dept}
+          </Typography>
         </Box>
       </InfoStyle>
       <Image alt="profile cover" src={cover} sx={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }} />

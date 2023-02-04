@@ -6,7 +6,7 @@ import Slider from 'react-slick';
 import { useTheme } from '@mui/material/styles';
 import { Box, Stack, Card, Button, Container, Typography } from '@mui/material';
 // _mock_
-import { _carouselsMembers } from '../../_mock';
+// import { _carouselsMembers } from '../../_mock';
 // components
 import Image from '../../components/Image';
 import Iconify from '../../components/Iconify';
@@ -18,7 +18,19 @@ import { MotionViewport, varFade } from '../../components/animate';
 
 export default function AboutTeam() {
   const carouselRef = useRef(null);
+  const _carouselsMembers = [
+    {
+      id: '1',
+      name: 'Rahul Gaikwad',
+      role: 'Frontend Developer',
+      avatar: 'https://pbs.twimg.com/profile_images/1471857462374404097/pYyp27dq_400x400.jpg',
+    },
+    { id: '2', name: `Martina D'Souza`, role: 'Project Guide', avatar: '' },
 
+    { id: '3', name: 'Manjiri Tare', role: 'UI/UX design', avatar: '' },
+    { id: '4', name: 'Dipali Ghararte', role: 'Testing and Quality Assuarance', avatar: '' },
+    { id: '5', name: 'Vinod Bhat', role: 'Backend Developer', avatar: '' },
+  ];
   const theme = useTheme();
 
   const settings = {
@@ -73,8 +85,8 @@ export default function AboutTeam() {
             color: (theme) => (theme.palette.mode === 'light' ? 'text.secondary' : 'common.white'),
           }}
         >
-          Minimal will provide you support if you have any problems, our support team will reply within a day and we
-          also have detailed documentation.
+          Knowza will provide you support if you have any problems, our support team will reply within a day and we also
+          have detailed documentation.
         </Typography>
       </m.div>
 
@@ -89,7 +101,7 @@ export default function AboutTeam() {
           </Slider>
         </CarouselArrows>
       </Box>
-      <Button
+      {/* <Button
         variant="outlined"
         color="inherit"
         size="large"
@@ -97,7 +109,7 @@ export default function AboutTeam() {
         sx={{ mx: 'auto' }}
       >
         View all team members
-      </Button>
+      </Button> */}
     </Container>
   );
 }

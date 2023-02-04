@@ -1,7 +1,7 @@
 import { m } from 'framer-motion';
 // @mui
-import { styled } from '@mui/material/styles';
-import { Box, Container, Typography } from '@mui/material';
+import { rgbToHex, styled } from '@mui/material/styles';
+import { Box, colors, Container, Typography } from '@mui/material';
 // components
 import { MotionContainer, TextAnimate, varFade } from '../../components/animate';
 
@@ -10,9 +10,9 @@ import { MotionContainer, TextAnimate, varFade } from '../../components/animate'
 const RootStyle = styled('div')(({ theme }) => ({
   backgroundSize: 'cover',
   backgroundPosition: 'center',
-  backgroundImage:
-    'url(https://minimal-assets-api.vercel.app/assets/overlay.svg), url(https://minimal-assets-api.vercel.app/assets/images/about/hero.jpg)',
+  backgroundImage: 'url(https://raw.githubusercontent.com/201903011/assets/master/AboutHero.png)',
   padding: theme.spacing(10, 0),
+
   [theme.breakpoints.up('md')]: {
     height: 560,
     padding: 0,
@@ -38,8 +38,8 @@ export default function AboutHero() {
           <TextAnimate text="Who" sx={{ color: 'primary.main' }} variants={varFade().inRight} />
           <br />
           <Box sx={{ display: 'inline-flex', color: 'common.white' }}>
-            <TextAnimate text="we" sx={{ mr: 2 }} />
-            <TextAnimate text="are?" />
+            <TextAnimate text="behind" sx={{ mr: 2 }} />
+            <TextAnimate text="Knowza?" />
           </Box>
 
           <m.div variants={varFade().inRight}>
@@ -51,8 +51,8 @@ export default function AboutHero() {
                 fontWeight: 'fontWeightMedium',
               }}
             >
-              Let's work together and
-              <br /> make awesome site easily
+              Let's read together and
+              <br /> make awesome library easily
             </Typography>
           </m.div>
         </ContentStyle>

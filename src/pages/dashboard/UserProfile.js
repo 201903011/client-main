@@ -49,6 +49,9 @@ export default function UserProfile() {
 
   const { user } = useAuth();
 
+  console.log('this is usera');
+  console.log(user);
+
   const { currentTab, onChangeTab } = useTabs('profile');
 
   const [findFriends, setFindFriends] = useState('');
@@ -58,26 +61,26 @@ export default function UserProfile() {
   };
 
   const PROFILE_TABS = [
-    {
-      value: 'profile',
-      icon: <Iconify icon={'ic:round-account-box'} width={20} height={20} />,
-      component: <Profile myProfile={_userAbout} posts={_userFeeds} />,
-    },
-    {
-      value: 'followers',
-      icon: <Iconify icon={'eva:heart-fill'} width={20} height={20} />,
-      component: <ProfileFollowers followers={_userFollowers} />,
-    },
-    {
-      value: 'friends',
-      icon: <Iconify icon={'eva:people-fill'} width={20} height={20} />,
-      component: <ProfileFriends friends={_userFriends} findFriends={findFriends} onFindFriends={handleFindFriends} />,
-    },
-    {
-      value: 'gallery',
-      icon: <Iconify icon={'ic:round-perm-media'} width={20} height={20} />,
-      component: <ProfileGallery gallery={_userGallery} />,
-    },
+    // {
+    //   value: 'profile',
+    //   icon: <Iconify icon={'ic:round-account-box'} width={20} height={20} />,
+    //   component: <Profile myProfile={_userAbout} posts={_userFeeds} />,
+    // },
+    // {
+    //   value: 'Subjects',
+    //   icon: <Iconify icon={'eva:book-open-outline'} width={20} height={20} />,
+    //   component: <ProfileFollowers followers={_userFollowers} />,
+    // },
+    // {
+    //   value: 'friends',
+    //   icon: <Iconify icon={'eva:people-fill'} width={20} height={20} />,
+    //   component: <ProfileFriends friends={_userFriends} findFriends={findFriends} onFindFriends={handleFindFriends} />,
+    // },
+    // {
+    //   value: 'gallery',
+    //   icon: <Iconify icon={'ic:round-perm-media'} width={20} height={20} />,
+    //   component: <ProfileGallery gallery={_userGallery} />,
+    // },
   ];
 
   return (
@@ -88,7 +91,7 @@ export default function UserProfile() {
           links={[
             { name: 'Dashboard', href: PATH_DASHBOARD.root },
             { name: 'User', href: PATH_DASHBOARD.user.root },
-            { name: user?.displayName || '' },
+            { name: user?.name || '' },
           ]}
         />
         <Card
@@ -100,7 +103,7 @@ export default function UserProfile() {
         >
           <ProfileCover myProfile={_userAbout} />
 
-          <TabsWrapperStyle>
+          {/* <TabsWrapperStyle>
             <Tabs
               allowScrollButtonsMobile
               variant="scrollable"
@@ -112,13 +115,16 @@ export default function UserProfile() {
                 <Tab disableRipple key={tab.value} value={tab.value} icon={tab.icon} label={capitalCase(tab.value)} />
               ))}
             </Tabs>
-          </TabsWrapperStyle>
+          </TabsWrapperStyle> */}
         </Card>
 
-        {PROFILE_TABS.map((tab) => {
+        <Profile myProfile={_userAbout} posts={_userFeeds} />
+        {/* <ProfileFollowers followers={_userFollowers} /> */}
+
+        {/* {PROFILE_TABS.map((tab) => {
           const isMatched = tab.value === currentTab;
           return isMatched && <Box key={tab.value}>{tab.component}</Box>;
-        })}
+        })} */}
       </Container>
     </Page>
   );

@@ -7,9 +7,9 @@ import LogoOnlyLayout from '../layouts/LogoOnlyLayout';
 // guards
 import GuestGuard from '../guards/GuestGuard';
 import AuthGuard from '../guards/AuthGuard';
-// import RoleBasedGuard from '../guards/RoleBasedGuard';
+import RoleBasedGuard from '../guards/RoleBasedGuard';
 // config
-import { PATH_AFTER_LOGIN } from '../config';
+import { PATH_AFTER_LOGIN, PATH_AFTER_LOGIN_ADMIN } from '../config';
 // components
 import LoadingScreen from '../components/LoadingScreen';
 import AppLayout from '../layouts/app';
@@ -68,13 +68,21 @@ export default function Router() {
       path: 'lmsapp',
       element: (
         <AuthGuard>
-          <AppLayout />
+          <RoleBasedGuard accessibleRoles={['student']}>
+            <AppLayout />
+          </RoleBasedGuard>
         </AuthGuard>
       ),
       children: [
         { element: <Navigate to={PATH_AFTER_LOGIN} replace />, index: true },
-        { path: 'app', element: <BookList /> },
-        { path: 'ecommerce', element: <GeneralEcommerce /> },
+        {
+          path: 'app',
+          element: <BookList />,
+        },
+        {
+          path: 'ecommerce',
+          element: <GeneralEcommerce />,
+        },
         { path: 'analytics', element: <GeneralAnalytics /> },
         { path: 'banking', element: <GeneralBanking /> },
         { path: 'booking', element: <GeneralBooking /> },
@@ -100,11 +108,13 @@ export default function Router() {
       path: 'dashboard',
       element: (
         <AuthGuard>
-          <DashboardLayout />
+          <RoleBasedGuard accessibleRoles={['admin']}>
+            <DashboardLayout />
+          </RoleBasedGuard>
         </AuthGuard>
       ),
       children: [
-        { element: <Navigate to={PATH_AFTER_LOGIN} replace />, index: true },
+        { element: <Navigate to={PATH_AFTER_LOGIN_ADMIN} replace />, index: true },
         { path: 'app', element: <GeneralApp /> },
         { path: 'ecommerce', element: <GeneralEcommerce /> },
         { path: 'analytics', element: <GeneralAnalytics /> },

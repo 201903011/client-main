@@ -15,7 +15,7 @@ import { MotionContainer, varFade } from '../../components/animate';
 
 const RootStyle = styled(m.div)(({ theme }) => ({
   position: 'relative',
-  backgroundColor: theme.palette.grey[400],
+  backgroundColor: theme.palette.grey[800],
   [theme.breakpoints.up('md')]: {
     top: 0,
     left: 0,
@@ -58,7 +58,7 @@ const HeroImgStyle = styled(m.img)(({ theme }) => ({
   margin: 'auto',
   position: 'absolute',
   [theme.breakpoints.up('lg')]: {
-    right: '8%',
+    right: '4%',
     width: 'auto',
     height: '48vh',
   },
@@ -78,7 +78,7 @@ export default function HomeHero() {
 
         <HeroImgStyle
           alt="hero"
-          src="https://raw.githubusercontent.com/201903011/assets/master/hero.png"
+          src="https://raw.githubusercontent.com/201903011/assets/master/herodark.png"
           variants={varFade().inUp}
         />
 
