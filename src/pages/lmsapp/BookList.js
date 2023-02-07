@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // @mui
-import { Box, Card, Container, TablePagination } from '@mui/material';
+import { Box, Card, Container, Pagination } from '@mui/material';
 // redux
 import { useDispatch, useSelector } from '../../redux/store';
 import { getBookslist } from '../../redux/slices/book';
@@ -31,26 +31,28 @@ const selectedEventSelector = (state) => {
 export default function UserList() {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getBookslist());
-  }, [dispatch]);
-
+  const [page, setPage] = useState(1);
   const booksData = useSelector(selectedEventSelector);
 
-  const {
-    page,
+  const handleChangepag = (event, value) => {
+    console.log(value);
+    setPage(value);
+    dispatch(getBookslist(value));
+  };
 
-    rowsPerPage,
-
-    onChangePage,
-    onChangeRowsPerPage,
-  } = useTable();
+  useEffect(() => {
+    dispatch(getBookslist(page));
+  }, [dispatch]);
 
   const { themeStretch } = useSettings();
 
   return (
     <Page title="Book: List">
       <Container maxWidth={themeStretch ? false : 'lg'}>
+        <Box sx={{ position: 'relative' }}>
+          <Pagination count={196} page={page} onChange={handleChangepag} />
+        </Box>
+        <Box height={30} />
         <Box
           sx={{
             display: 'grid',
@@ -66,20 +68,20 @@ export default function UserList() {
             return <BookCard key={book._id} book={book} />;
           })}
         </Box>
+        <Box height={30} />
+        {/* <Box
+          sx={{
+            width: 300,
+            height: 300,
+            
+          }}
+        /> */}
 
-        <Card>
+        {/* <Card>
           <Box sx={{ position: 'relative' }}>
-            <TablePagination
-              rowsPerPageOptions={[5, 10, 25]}
-              component="div"
-              count={50}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              onPageChange={onChangePage}
-              onRowsPerPageChange={onChangeRowsPerPage}
-            />
+            <Pagination count={196} page={page} onChange={handleChangepag} />
           </Box>
-        </Card>
+        </Card> */}
       </Container>
     </Page>
   );

@@ -64,12 +64,12 @@ export const { getBooks, updateBooks, createBooks } = slice.actions;
 
 // ----------------------------------------------------------------------
 
-export function getBookslist() {
-  console.log('hiii');
+export function getBookslist(page) {
+  console.log(`hiii ${page}`);
   return async () => {
     dispatch(slice.actions.startLoading());
     try {
-      const response = await axios.get(`${process.env.REACT_APP_HOST_API_KEY}/api/user/books/get-books?page=1`);
+      const response = await axios.get(`${process.env.REACT_APP_HOST_API_KEY}/api/user/books/get-books?page=${page}`);
       console.log(response.data);
       dispatch(slice.actions.getBooks(response.data.books));
     } catch (error) {

@@ -1,5 +1,6 @@
 import { Suspense, lazy } from 'react';
 import { Navigate, useRoutes, useLocation } from 'react-router-dom';
+import CustomNavigate from './decide';
 // layouts
 import MainLayout from '../layouts/main';
 import DashboardLayout from '../layouts/dashboard';
@@ -8,6 +9,8 @@ import LogoOnlyLayout from '../layouts/LogoOnlyLayout';
 import GuestGuard from '../guards/GuestGuard';
 import AuthGuard from '../guards/AuthGuard';
 import RoleBasedGuard from '../guards/RoleBasedGuard';
+// hooks
+import useAuth from '../hooks/useAuth';
 // config
 import { PATH_AFTER_LOGIN, PATH_AFTER_LOGIN_ADMIN } from '../config';
 // components
@@ -16,10 +19,11 @@ import AppLayout from '../layouts/app';
 
 // ----------------------------------------------------------------------
 
+const role = '';
 const Loadable = (Component) => (props) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const { pathname } = useLocation();
-
+  const role = 'student';
   return (
     <Suspense fallback={<LoadingScreen isDashboard={pathname.includes('/lmsapp')} />}>
       <Component {...props} />
@@ -108,13 +112,11 @@ export default function Router() {
       path: 'dashboard',
       element: (
         <AuthGuard>
-          <RoleBasedGuard accessibleRoles={['admin']}>
-            <DashboardLayout />
-          </RoleBasedGuard>
+          <DashboardLayout />
         </AuthGuard>
       ),
       children: [
-        { element: <Navigate to={PATH_AFTER_LOGIN_ADMIN} replace />, index: true },
+        { element: <CustomNavigate />, index: true },
         { path: 'app', element: <GeneralApp /> },
         { path: 'ecommerce', element: <GeneralEcommerce /> },
         { path: 'analytics', element: <GeneralAnalytics /> },
@@ -182,8 +184,8 @@ export default function Router() {
             { path: ':conversationKey', element: <Chat /> },
           ],
         },
-        { path: 'calendar', element: <Calendar /> },
-        { path: 'kanban', element: <Kanban /> },
+        // { path: 'calendar', element: <Calendar /> },
+        // { path: 'kanban', element: <Kanban /> },
       ],
     },
 
@@ -230,11 +232,11 @@ const VerifyCode = Loadable(lazy(() => import('../pages/auth/VerifyCode')));
 // APP USER
 
 const BookList = Loadable(lazy(() => import('../pages/lmsapp/BookList')));
-const AppUserProfile = Loadable(lazy(() => import('../pages/dashboard/UserProfile')));
-const AppUserCards = Loadable(lazy(() => import('../pages/dashboard/UserCards')));
-const AppUserList = Loadable(lazy(() => import('../pages/dashboard/UserList')));
-const AppUserAccount = Loadable(lazy(() => import('../pages/dashboard/UserAccount')));
-const AppUserCreate = Loadable(lazy(() => import('../pages/dashboard/UserCreate')));
+const AppUserProfile = Loadable(lazy(() => import('../pages/lmsapp/UserProfile')));
+const AppUserCards = Loadable(lazy(() => import('../pages/lmsapp/UserCards')));
+const AppUserList = Loadable(lazy(() => import('../pages/lmsapp/UserList')));
+const AppUserAccount = Loadable(lazy(() => import('../pages/lmsapp/UserAccount')));
+const AppUserCreate = Loadable(lazy(() => import('../pages/lmsapp/UserCreate')));
 
 // DASHBOARD
 

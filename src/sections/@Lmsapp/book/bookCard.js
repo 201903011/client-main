@@ -39,7 +39,7 @@ const OverlayStyle = styled('div')(({ theme }) => ({
 // ----------------------------------------------------------------------
 
 BookCard.propTypes = {
-  user: PropTypes.object.isRequired,
+  book: PropTypes.object.isRequired,
 };
 // const book = {
 //   _id: '632164fae49adfa2051e6b02',
@@ -64,37 +64,61 @@ BookCard.propTypes = {
 export default function BookCard({ book }) {
   return (
     <Card sx={{ textAlign: 'left' }}>
-      <CardMedia sx={{ height: 240 }} image={book.book_detail[0].image_url} />
+      <CardMedia component="img" height="250" sx={{ objectFit: 'contain' }} image={book.book_detail[0].image_url} />
       <CardContent>
         <Typography gutterBottom variant="h6" component="div">
           {book.book_detail[0].title}
         </Typography>
-
-        <Typography variant="body2" color="text.secondary">
-          {book.book_detail[0].publisher}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {book.book_detail[0].author}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {book.book_detail[0].pages}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {book.book_detail[0].isbn}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          available books {book.available_books.length}
-        </Typography>
+        <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)' }}>
+          <Typography variant="body2" color="text.primary">
+            Publisher
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {book.book_detail[0].publisher}
+          </Typography>
+        </Box>
+        <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)' }}>
+          <Typography variant="body2" color="text.primary">
+            Author
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {book.book_detail[0].author}
+          </Typography>
+        </Box>
+        <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)' }}>
+          <Typography variant="body2" color="text.primary">
+            Pages
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {book.book_detail[0].pages}
+          </Typography>
+        </Box>
+        <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)' }}>
+          <Typography variant="body2" color="text.primary">
+            ISBN
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {book.book_detail[0].isbn}
+          </Typography>
+        </Box>
+        <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)' }}>
+          <Typography variant="body2" color="text.primary">
+            Available books
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {book.available_books.length}
+          </Typography>
+        </Box>
       </CardContent>
       <CardActions>
         {book.available_books.length !== 0 ? (
-          <Button size="small">Get Book</Button>
+          <Button size="small">Notify</Button>
         ) : (
           <Typography variant="body2" color="text.secondary">
             not available
           </Typography>
         )}
-        
+
         <Button size="small">View details</Button>
       </CardActions>
     </Card>
