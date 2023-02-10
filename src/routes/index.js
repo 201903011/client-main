@@ -10,7 +10,7 @@ import GuestGuard from '../guards/GuestGuard';
 import AuthGuard from '../guards/AuthGuard';
 import RoleBasedGuard from '../guards/RoleBasedGuard';
 // hooks
-import useAuth from '../hooks/useAuth';
+
 // config
 import { PATH_AFTER_LOGIN, PATH_AFTER_LOGIN_ADMIN } from '../config';
 // components
@@ -19,7 +19,6 @@ import AppLayout from '../layouts/app';
 
 // ----------------------------------------------------------------------
 
-const role = '';
 const Loadable = (Component) => (props) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const { pathname } = useLocation();

@@ -25,11 +25,26 @@ export default function AboutTeam() {
       role: 'Frontend Developer',
       avatar: 'https://pbs.twimg.com/profile_images/1471857462374404097/pYyp27dq_400x400.jpg',
     },
-    { id: '2', name: `Martina D'Souza`, role: 'Project Guide', avatar: '' },
+    {
+      id: '2',
+      name: `Martina D'Souza`,
+      role: 'Project Guide',
+      avatar: 'https://www.xavier.ac.in/xvadmin/images/profiles/10012020104318.png',
+    },
 
     { id: '3', name: 'Manjiri Tare', role: 'UI/UX design', avatar: '' },
-    { id: '4', name: 'Dipali Ghararte', role: 'Testing and Quality Assuarance', avatar: '' },
-    { id: '5', name: 'Vinod Bhat', role: 'Backend Developer', avatar: '' },
+    {
+      id: '4',
+      name: 'Dipali Ghararte',
+      role: 'Testing and Quality Assuarance',
+      avatar: 'https://avatars.githubusercontent.com/u/90377830?v=4',
+    },
+    {
+      id: '5',
+      name: 'Vinod Bhat',
+      role: 'Backend Developer',
+      avatar: 'https://avatars.githubusercontent.com/u/51293918?v=4',
+    },
   ];
   const theme = useTheme();
 

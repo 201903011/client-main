@@ -9,7 +9,7 @@ import { PATH_AFTER_LOGIN, PATH_AFTER_LOGIN_ADMIN } from '../config';
 export default function CustomNavigate() {
   const { user } = useAuth();
 
-  if (user.email === 'student12@gmail.com') {
+  if (user.islibrarian === true) {
     return <Navigate to={PATH_AFTER_LOGIN_ADMIN} replace />;
   }
   return <Navigate to={PATH_AFTER_LOGIN} replace />;

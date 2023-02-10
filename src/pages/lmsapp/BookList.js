@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // @mui
-import { Box, Card, Container, Pagination } from '@mui/material';
+import { Box, Card, Container, Pagination, Input, Button } from '@mui/material';
 // redux
 import { useDispatch, useSelector } from '../../redux/store';
 import { getBookslist } from '../../redux/slices/book';
@@ -19,6 +19,7 @@ import { _userList } from '../../_mock';
 import Page from '../../components/Page';
 // sections
 import BookCard from '../../sections/@Lmsapp/book/bookCard';
+import Searchbar from '../../layouts/dashboard/header/Searchbar';
 
 const selectedEventSelector = (state) => {
   const { books } = state.book;
@@ -49,10 +50,7 @@ export default function UserList() {
   return (
     <Page title="Book: List">
       <Container maxWidth={themeStretch ? false : 'lg'}>
-        <Box sx={{ position: 'relative' }}>
-          <Pagination count={196} page={page} onChange={handleChangepag} />
-        </Box>
-        <Box height={30} />
+        {/* <Box height={30} /> */}
         <Box
           sx={{
             display: 'grid',
@@ -82,6 +80,9 @@ export default function UserList() {
             <Pagination count={196} page={page} onChange={handleChangepag} />
           </Box>
         </Card> */}
+        <Box sx={{ position: 'relative' }}>
+          <Pagination count={196} page={page} onChange={handleChangepag} />
+        </Box>
       </Container>
     </Page>
   );

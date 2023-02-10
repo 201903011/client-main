@@ -15,7 +15,7 @@ AuthGuard.propTypes = {
 };
 
 export default function AuthGuard({ children }) {
-  const { isAuthenticated, isInitialized } = useAuth();
+  const { isAuthenticated, isInitialized, isLibrarian } = useAuth();
   const { pathname } = useLocation();
   const [requestedLocation, setRequestedLocation] = useState(null);
 
@@ -28,6 +28,11 @@ export default function AuthGuard({ children }) {
       setRequestedLocation(pathname);
     }
     return <Login />;
+  }
+
+  if (isLibrarian && isAuthenticated) {
+    setRequestedLocation(null);
+    return <Navigate to={requestedLocation} />;
   }
 
   if (requestedLocation && pathname !== requestedLocation) {

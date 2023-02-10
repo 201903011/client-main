@@ -7,6 +7,9 @@ import cssStyles from '../../../utils/cssStyles';
 // components
 import Iconify from '../../../components/Iconify';
 import { IconButtonAnimate } from '../../../components/animate';
+// redux
+import { useDispatch, useSelector } from '../../../redux/store';
+import { getBookslist } from '../../../redux/slices/book';
 
 // ----------------------------------------------------------------------
 
@@ -35,12 +38,14 @@ const SearchbarStyle = styled('div')(({ theme }) => ({
 
 export default function Searchbar() {
   const [isOpen, setOpen] = useState(false);
+  const dispatch = useDispatch();
 
   const handleOpen = () => {
     setOpen((prev) => !prev);
   };
 
   const handleClose = () => {
+    // dispatch(getBookslist(5));
     setOpen(false);
   };
 
@@ -62,10 +67,7 @@ export default function Searchbar() {
               placeholder="Search…"
               startAdornment={
                 <InputAdornment position="start">
-                  <Iconify
-                    icon={'eva:search-fill'}
-                    sx={{ color: 'text.disabled', width: 20, height: 20 }}
-                  />
+                  <Iconify icon={'eva:search-fill'} sx={{ color: 'text.disabled', width: 20, height: 20 }} />
                 </InputAdornment>
               }
               sx={{ mr: 1, fontWeight: 'fontWeightBold' }}
