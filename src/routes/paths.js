@@ -7,6 +7,7 @@ function path(root, sublink) {
 const ROOTS_AUTH = '/auth';
 const ROOTS_DASHBOARD = '/dashboard';
 const ROOTS_APP = '/lmsapp';
+const ROOTS_APP_ADMIN = '/admin';
 
 // ----------------------------------------------------------------------
 
@@ -37,20 +38,48 @@ export const PATH_APP = {
   root: ROOTS_APP,
   general: {
     app: path(ROOTS_APP, '/app'),
-    ecommerce: path(ROOTS_APP, '/ecommerce'),
-    analytics: path(ROOTS_APP, '/analytics'),
-    banking: path(ROOTS_APP, '/banking'),
-    booking: path(ROOTS_APP, '/booking'),
+    customsearch: path(ROOTS_APP, '/customsearch'),
+    statistics: path(ROOTS_APP, '/statistics'),
+    fine: path(ROOTS_APP, '/fine'),
+    watchlist: path(ROOTS_APP, '/watchlist'),
+    notifications: path(ROOTS_APP, '/notifications'),
   },
   user: {
     root: path(ROOTS_APP, '/user'),
-    new: path(ROOTS_APP, '/user/new'),
-    list: path(ROOTS_APP, '/user/list'),
-    cards: path(ROOTS_APP, '/user/cards'),
     profile: path(ROOTS_APP, '/user/profile'),
+    issued: path(ROOTS_APP, '/user/issued'),
+    history: path(ROOTS_APP, '/user/history'),
     account: path(ROOTS_APP, '/user/account'),
-    edit: (name) => path(ROOTS_APP, `/user/${name}/edit`),
-    demoEdit: path(ROOTS_APP, `/user/reece-chung/edit`),
+  },
+};
+export const PATH_APP_ADMIN = {
+  root: ROOTS_APP_ADMIN,
+  general: {
+    app: path(ROOTS_APP_ADMIN, '/app'),
+    analytics: path(ROOTS_APP_ADMIN, '/analytics'),
+    payment: path(ROOTS_APP_ADMIN, '/payment'),
+    report: path(ROOTS_APP_ADMIN, '/report'),
+  },
+  books: {
+    books: path(ROOTS_APP_ADMIN, '/books'),
+    booksadd: path(ROOTS_APP_ADMIN, '/books/add'),
+    booksupd: path(ROOTS_APP_ADMIN, '/books/update'),
+  },
+  circulation: {
+    circ: path(ROOTS_APP_ADMIN, '/circulation'),
+    issue: path(ROOTS_APP_ADMIN, '/circulation/issue'),
+    return: path(ROOTS_APP_ADMIN, '/circulation/return'),
+  },
+  student: {
+    root: path(ROOTS_APP_ADMIN, '/student'),
+    authorize: path(ROOTS_APP_ADMIN, '/student/authorize'),
+    list: path(ROOTS_APP_ADMIN, '/student/list'),
+    fine: path(ROOTS_APP_ADMIN, '/student/fine'),
+  },
+  user: {
+    root: path(ROOTS_APP_ADMIN, '/user'),
+    profile: path(ROOTS_APP_ADMIN, '/user/profile'),
+    account: path(ROOTS_APP_ADMIN, '/user/account'),
   },
 };
 

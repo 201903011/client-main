@@ -9,6 +9,7 @@ import { isValidToken, setSession } from '../utils/jwt';
 const initialState = {
   isAuthenticated: false,
   isInitialized: false,
+  islibrarian: false,
   user: null,
 };
 
@@ -19,6 +20,7 @@ const handlers = {
       ...state,
       isAuthenticated,
       isInitialized: true,
+
       user,
     };
   },
@@ -37,6 +39,7 @@ const handlers = {
     return {
       ...state,
       isAuthenticated: true,
+      islibrarian: true,
       user,
     };
   },
@@ -84,11 +87,10 @@ function AuthProvider({ children }) {
         if (accessToken && isValidToken(accessToken)) {
           setSession(accessToken);
 
-          const response = await axios.post(
-            `${process.env.REACT_APP_HOST_API_KEY}/api/user/student/get-student-info`,
-
+          const re = await axios.post(
+            `${process.env.REACT_APP_HOST_API_KEY_ADMIN}/librarian/get-librarian-info`,
             {
-              jwtEncodedStudent: accessToken,
+              jwtEncodedLibrarain: accessToken,
             },
             {
               headers: {
@@ -97,16 +99,22 @@ function AuthProvider({ children }) {
               },
             }
           );
-          const { student } = response.data;
-          // console.log(student);
+          const { librarian } = re.data;
+          console.log('librarian');
+          console.log(librarian);
+
+          window.localStorage.setItem('accessToken', accessToken);
+
           dispatch({
             type: 'INITIALIZE',
             payload: {
+              user: librarian,
               isAuthenticated: true,
-              user: student,
+              islibrarian: true,
             },
           });
         } else {
+          console.log('initialize');
           dispatch({
             type: 'INITIALIZE',
             payload: {
@@ -116,14 +124,54 @@ function AuthProvider({ children }) {
           });
         }
       } catch (err) {
-        console.error(err);
-        dispatch({
-          type: 'INITIALIZE',
-          payload: {
-            isAuthenticated: false,
-            user: null,
-          },
-        });
+        try {
+          const accessToken = window.localStorage.getItem('accessToken');
+
+          if (accessToken && isValidToken(accessToken)) {
+            setSession(accessToken);
+
+            const response = await axios.post(
+              `${process.env.REACT_APP_HOST_API_KEY}/api/user/student/get-student-info`,
+
+              {
+                jwtEncodedStudent: accessToken,
+              },
+              {
+                headers: {
+                  authorization: `Bearer ${accessToken}`,
+                  'Content-type': 'application/json',
+                },
+              }
+            );
+            const { student } = response.data;
+            // console.log(student);
+            dispatch({
+              type: 'INITIALIZE',
+              payload: {
+                isAuthenticated: true,
+                user: student,
+                islibrarian: true,
+              },
+            });
+          } else {
+            dispatch({
+              type: 'INITIALIZE',
+              payload: {
+                isAuthenticated: false,
+                user: null,
+              },
+            });
+          }
+        } catch (err) {
+          console.error(err);
+          dispatch({
+            type: 'INITIALIZE',
+            payload: {
+              isAuthenticated: false,
+              user: null,
+            },
+          });
+        }
       }
     };
 
@@ -163,25 +211,41 @@ function AuthProvider({ children }) {
   };
 
   const loginadmin = async (email, password) => {
-    console.log('exee');
-    const response = await axios.post(`${process.env.REACT_APP_HOST_API_KEY}/api/user/student/signin`, {
+    console.log('hii');
+    const response = await axios.post(`${process.env.REACT_APP_HOST_API_KEY_ADMIN}/librarian/signin`, {
       email,
       password,
     });
-    console.log(response.data);
-    const { token, user } = response.data;
+    const { token } = response.data;
+
+    const re = await axios.post(
+      `${process.env.REACT_APP_HOST_API_KEY_ADMIN}/librarian/get-librarian-info`,
+      {
+        jwtEncodedLibrarain: token,
+      },
+      {
+        headers: {
+          authorization: `Bearer ${token}`,
+          'Content-type': 'application/json',
+        },
+      }
+    );
+    const { librarian } = re.data;
+    console.log(librarian);
 
     window.localStorage.setItem('accessToken', token);
+
     dispatch({
       type: 'LOGINADMIN',
       payload: {
-        user,
+        user: librarian,
+        islibrarian: true,
       },
     });
   };
 
   const register = async (email, password, firstName, lastName, midname, phone, address, dept, year, grno) => {
-    const response = await axios.post(`${process.env.REACT_APP_HOST_API_KEY}/api/user/student/create-student`, {
+    await axios.post(`${process.env.REACT_APP_HOST_API_KEY}/api/user/student/create-student`, {
       email: email.toString(),
       password: password.toString(),
       name: `${firstName.toString()} ${midname.toString()} ${lastName.toString()} `,

@@ -1,5 +1,5 @@
 // routes
-import { PATH_APP, PATH_DASHBOARD } from './routes/paths';
+import { PATH_APP, PATH_APP_ADMIN, PATH_DASHBOARD } from './routes/paths';
 
 // API
 // ----------------------------------------------------------------------
@@ -32,7 +32,7 @@ export const MAPBOX_API = process.env.REACT_APP_MAPBOX;
 // ROOT PATH AFTER LOGIN SUCCESSFUL
 export const PATH_AFTER_LOGIN = PATH_APP.general.app; // as '/dashboard/app'
 
-export const PATH_AFTER_LOGIN_ADMIN = PATH_DASHBOARD.general.app;
+export const PATH_AFTER_LOGIN_ADMIN = PATH_APP_ADMIN.general.app;
 // LAYOUT
 // ----------------------------------------------------------------------
 

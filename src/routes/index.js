@@ -5,6 +5,8 @@ import CustomNavigate from './decide';
 import MainLayout from '../layouts/main';
 import DashboardLayout from '../layouts/dashboard';
 import LogoOnlyLayout from '../layouts/LogoOnlyLayout';
+import AppLayout from '../layouts/app';
+import AdminAppLayout from '../layouts/admin';
 // guards
 import GuestGuard from '../guards/GuestGuard';
 import AuthGuard from '../guards/AuthGuard';
@@ -15,14 +17,13 @@ import RoleBasedGuard from '../guards/RoleBasedGuard';
 import { PATH_AFTER_LOGIN, PATH_AFTER_LOGIN_ADMIN } from '../config';
 // components
 import LoadingScreen from '../components/LoadingScreen';
-import AppLayout from '../layouts/app';
 
 // ----------------------------------------------------------------------
 
 const Loadable = (Component) => (props) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const { pathname } = useLocation();
-  const role = 'student';
+
   return (
     <Suspense fallback={<LoadingScreen isDashboard={pathname.includes('/lmsapp')} />}>
       <Component {...props} />
@@ -78,31 +79,79 @@ export default function Router() {
       ),
       children: [
         { element: <Navigate to={PATH_AFTER_LOGIN} replace />, index: true },
-        {
-          path: 'app',
-          element: <BookList />,
-        },
-        {
-          path: 'ecommerce',
-          element: <GeneralEcommerce />,
-        },
-        { path: 'analytics', element: <GeneralAnalytics /> },
-        { path: 'banking', element: <GeneralBanking /> },
-        { path: 'booking', element: <GeneralBooking /> },
+        { path: 'app', element: <BookList /> },
+        { path: 'customsearch', element: <GeneralEcommerce /> },
+        { path: 'statistics', element: <GeneralAnalytics /> },
+        { path: 'fine', element: <GeneralBanking /> },
+
         {
           path: 'user',
           children: [
             { element: <Navigate to="/lmsapp/user/profile" replace />, index: true },
             { path: 'profile', element: <AppUserProfile /> },
-            { path: 'cards', element: <AppUserCards /> },
-            { path: 'list', element: <AppUserList /> },
-            { path: 'new', element: <AppUserCreate /> },
-            { path: ':name/edit', element: <AppUserCreate /> },
+            { path: 'issued', element: <AppUserCards /> },
+            { path: 'history', element: <AppUserList /> },
             { path: 'account', element: <AppUserAccount /> },
           ],
         },
-        { path: 'calendar', element: <Calendar /> },
-        { path: 'kanban', element: <Kanban /> },
+        { path: 'watchlist', element: <Calendar /> },
+        { path: 'notifications', element: <Kanban /> },
+      ],
+    },
+
+    // Admin Page Routes
+    {
+      path: 'admin',
+      element: (
+        <AuthGuard>
+          <RoleBasedGuard accessibleRoles={['librarian']}>
+            <AdminAppLayout />
+          </RoleBasedGuard>
+        </AuthGuard>
+      ),
+      children: [
+        { element: <Navigate to={PATH_AFTER_LOGIN_ADMIN} replace />, index: true },
+        {
+          path: 'app',
+          element: <AdminBookList />,
+        },
+        {
+          path: 'books',
+          children: [
+            { element: <Navigate to="/admin/books/add" replace />, index: true },
+            { path: 'add', element: <AdminProfile /> },
+            { path: 'update', element: <AdminAccount /> },
+          ],
+        },
+        {
+          path: 'circulation',
+          children: [
+            { element: <Navigate to="/admin/circulation/issue" replace />, index: true },
+            { path: 'issue', element: <AdminProfile /> },
+            { path: 'return', element: <AdminAccount /> },
+          ],
+        },
+        { path: 'analytics', element: <GeneralAnalytics /> },
+        { path: 'payment', element: <GeneralBanking /> },
+        { path: 'report', element: <GeneralBooking /> },
+
+        {
+          path: 'student',
+          children: [
+            { element: <Navigate to="/admin/student/authorize" replace />, index: true },
+            { path: 'authorize', element: <AdminProfile /> },
+            { path: 'list', element: <AdminAccount /> },
+            { path: 'fine', element: <AdminAccount /> },
+          ],
+        },
+        {
+          path: 'user',
+          children: [
+            { element: <Navigate to="/admin/user/profile" replace />, index: true },
+            { path: 'profile', element: <AdminProfile /> },
+            { path: 'account', element: <AdminAccount /> },
+          ],
+        },
       ],
     },
 
@@ -225,7 +274,14 @@ const VerifyCode = Loadable(lazy(() => import('../pages/auth/VerifyCode')));
 
 // LMSAPP
 
-// GENERAL
+// ADMIN
+
+const AdminBookList = Loadable(lazy(() => import('../pages/admin/BookList')));
+const AdminProfile = Loadable(lazy(() => import('../pages/admin/UserProfile')));
+const AdminCards = Loadable(lazy(() => import('../pages/admin/UserCards')));
+const AdminList = Loadable(lazy(() => import('../pages/admin/UserList')));
+const AdminAccount = Loadable(lazy(() => import('../pages/admin/UserAccount')));
+const AdminCreate = Loadable(lazy(() => import('../pages/admin/UserCreate')));
 
 // USER
 // APP USER

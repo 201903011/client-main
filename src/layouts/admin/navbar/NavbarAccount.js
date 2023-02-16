@@ -6,7 +6,7 @@ import { Box, Link, Typography } from '@mui/material';
 // hooks
 import useAuth from '../../../hooks/useAuth';
 // routes
-import { PATH_APP } from '../../../routes/paths';
+import { PATH_APP_ADMIN } from '../../../routes/paths';
 // components
 import MyAvatar from '../../../components/MyAvatar';
 
@@ -33,7 +33,7 @@ export default function NavbarAccount({ isCollapse }) {
   const { user } = useAuth();
 
   return (
-    <Link underline="none" color="inherit" component={RouterLink} to={PATH_APP.user.profile}>
+    <Link underline="none" color="inherit" component={RouterLink} to={PATH_APP_ADMIN.user.account}>
       <RootStyle
         sx={{
           ...(isCollapse && {
@@ -60,7 +60,7 @@ export default function NavbarAccount({ isCollapse }) {
             {user?.name}
           </Typography>
           <Typography variant="body2" noWrap sx={{ color: 'text.secondary' }}>
-            Student
+            {user.islibrarian ? 'Librarian' : 'student'}
           </Typography>
         </Box>
       </RootStyle>

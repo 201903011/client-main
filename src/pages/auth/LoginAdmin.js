@@ -13,7 +13,7 @@ import Page from '../../components/Page';
 import Logo from '../../components/Logo';
 import Image from '../../components/Image';
 // sections
-import { LoginForm } from '../../sections/auth/login';
+import { LoginAdminForm } from '../../sections/auth/loginadmin/LoginForm';
 
 // ----------------------------------------------------------------------
 
@@ -103,7 +103,7 @@ export default function LoginAdmin() {
               Use email : <strong>demo@minimals.cc</strong> / password :<strong> demo1234</strong>
             </Alert>
 
-            <LoginForm />
+            <LoginAdminForm />
           </ContentStyle>
         </Container>
       </RootStyle>

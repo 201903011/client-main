@@ -1,5 +1,5 @@
 // routes
-import { PATH_APP, PATH_DASHBOARD } from '../../../routes/paths';
+import { PATH_APP, PATH_DASHBOARD, PATH_DOCS } from '../../../routes/paths';
 // components
 import Label from '../../../components/Label';
 import SvgIconStyle from '../../../components/SvgIconStyle';
@@ -13,15 +13,20 @@ const ICONS = {
   cart: getIcon('ic_cart'),
   chat: getIcon('ic_chat'),
   mail: getIcon('ic_mail'),
+  student: getIcon('ic_stud'),
   user: getIcon('ic_user'),
   kanban: getIcon('ic_kanban'),
   banking: getIcon('ic_banking'),
   booking: getIcon('ic_booking'),
   invoice: getIcon('ic_invoice'),
-  calendar: getIcon('ic_calendar'),
-  ecommerce: getIcon('ic_ecommerce'),
+  calendar: getIcon('ic_settings'),
+  ecommerce: getIcon('ic_circ'),
   analytics: getIcon('ic_analytics'),
-  dashboard: getIcon('ic_dashboard'),
+  book: getIcon('ic_book'),
+  documents: getIcon('ic_doc'),
+  search: getIcon('ic_search'),
+  watchlist: getIcon('ic_watchlist'),
+  notification: getIcon('ic_not'),
 };
 
 const navConfig = [
@@ -30,11 +35,10 @@ const navConfig = [
   {
     subheader: 'general',
     items: [
-      { title: 'books', path: PATH_APP.general.app, icon: ICONS.dashboard },
-      { title: 'e-commerce', path: PATH_APP.general.ecommerce, icon: ICONS.ecommerce },
-      { title: 'analytics', path: PATH_APP.general.analytics, icon: ICONS.analytics },
-      { title: 'banking', path: PATH_APP.general.banking, icon: ICONS.banking },
-      { title: 'booking', path: PATH_APP.general.booking, icon: ICONS.booking },
+      { title: 'books', path: PATH_APP.general.app, icon: ICONS.book },
+      { title: 'custom search', path: PATH_APP.general.customsearch, icon: ICONS.search },
+      { title: 'statistics', path: PATH_APP.general.statistics, icon: ICONS.analytics },
+      { title: 'pay fine', path: PATH_APP.general.fine, icon: ICONS.banking },
     ],
   },
 
@@ -50,53 +54,36 @@ const navConfig = [
         icon: ICONS.user,
         children: [
           { title: 'profile', path: PATH_APP.user.profile },
-          { title: 'cards', path: PATH_APP.user.cards },
-          { title: 'list', path: PATH_APP.user.list },
-          { title: 'create', path: PATH_APP.user.new },
-          { title: 'edit', path: PATH_APP.user.demoEdit },
-          { title: 'account', path: PATH_APP.user.account },
+          { title: 'issued books', path: PATH_APP.user.issued },
+          { title: 'history', path: PATH_APP.user.history },
         ],
       },
 
       // E-COMMERCE
       {
-        title: 'e-commerce',
-        path: PATH_DASHBOARD.eCommerce.root,
-        icon: ICONS.cart,
-        children: [
-          { title: 'shop', path: PATH_DASHBOARD.eCommerce.shop },
-          { title: 'product', path: PATH_DASHBOARD.eCommerce.demoView },
-          { title: 'list', path: PATH_DASHBOARD.eCommerce.list },
-          { title: 'create', path: PATH_DASHBOARD.eCommerce.new },
-          { title: 'edit', path: PATH_DASHBOARD.eCommerce.demoEdit },
-          { title: 'checkout', path: PATH_DASHBOARD.eCommerce.checkout },
-        ],
+        title: 'watchlist',
+        path: PATH_APP.general.watchlist,
+        icon: ICONS.watchlist,
       },
 
       // INVOICE
       {
-        title: 'invoice',
-        path: PATH_DASHBOARD.invoice.root,
-        icon: ICONS.invoice,
-        children: [
-          { title: 'list', path: PATH_DASHBOARD.invoice.list },
-          { title: 'details', path: PATH_DASHBOARD.invoice.demoView },
-          { title: 'create', path: PATH_DASHBOARD.invoice.new },
-          { title: 'edit', path: PATH_DASHBOARD.invoice.demoEdit },
-        ],
+        title: 'Notifications',
+        path: PATH_APP.general.notifications,
+        icon: ICONS.notification,
       },
+    ],
+  },
 
-      // BLOG
-      {
-        title: 'blog',
-        path: PATH_DASHBOARD.blog.root,
-        icon: ICONS.blog,
-        children: [
-          { title: 'posts', path: PATH_DASHBOARD.blog.posts },
-          { title: 'post', path: PATH_DASHBOARD.blog.demoView },
-          { title: 'create', path: PATH_DASHBOARD.blog.new },
-        ],
-      },
+  // SETTINGS
+  // ----------------------------------------------------------------------
+  {
+    subheader: 'others',
+    items: [
+      // USER
+      { title: 'setting', path: PATH_APP.user.account, icon: ICONS.calendar },
+      { title: 'Profile', path: PATH_APP.user.profile, icon: ICONS.user },
+      { title: 'documentation', path: PATH_DOCS, icon: ICONS.documents },
     ],
   },
 

@@ -18,7 +18,7 @@ import { FormProvider, RHFTextField, RHFCheckbox } from '../../../components/hoo
 
 // ----------------------------------------------------------------------
 
-export default function LoginForm() {
+export function LoginAdminForm() {
   const { loginadmin } = useAuth();
 
   const isMountedRef = useIsMountedRef();
@@ -55,7 +55,7 @@ export default function LoginForm() {
       console.error(error);
       reset();
       if (isMountedRef.current) {
-        setError('afterSubmit', { ...error, message: error.message });
+        setError('afterSubmit', { ...error, message: error.response.statusText });
       }
     }
   };
