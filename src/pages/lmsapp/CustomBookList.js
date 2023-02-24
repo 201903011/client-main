@@ -1,25 +1,53 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-
+import * as Yup from 'yup';
+import { Link as RouterLink } from 'react-router-dom';
+// form
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
-import { Box, Card, Container, Pagination, Input, Button } from '@mui/material';
+import DatePicker from '@mui/lab/DatePicker';
+import { LoadingButton } from '@mui/lab';
+import {
+  Box,
+  Card,
+  Container,
+  Pagination,
+  Input,
+  Button,
+  FormControl,
+  InputLabel,
+  FormHelperText,
+  Stack,
+  TextField,
+  MenuItem,
+  Link,
+  Alert,
+  IconButton,
+  InputAdornment,
+} from '@mui/material';
 // redux
 import { useDispatch, useSelector } from '../../redux/store';
-import { getBookslist } from '../../redux/slices/book';
+import { getBookslist, getCustomBookslist } from '../../redux/slices/book';
 // routes
-import { PATH_DASHBOARD } from '../../routes/paths';
+import { PATH_AUTH } from '../../routes/paths';
 // hooks
 import useTabs from '../../hooks/useTabs';
-
+import useAuth from '../../hooks/useAuth';
+import useIsMountedRef from '../../hooks/useIsMountedRef';
 import useSettings from '../../hooks/useSettings';
 import useTable, { getComparator } from '../../hooks/useTable';
 // _mock_
 import { _userList } from '../../_mock';
 // components
 import Page from '../../components/Page';
+import { RHFSelect, FormProvider, RHFTextField, RHFCheckbox } from '../../components/hook-form';
+import Iconify from '../../components/Iconify';
+
 // sections
 import BookCard from '../../sections/@Lmsapp/book/bookCard';
 import Searchbar from '../../layouts/dashboard/header/Searchbar';
+// import CustomForm from '../../sections/@admin/book/CustomForm';
+import InvoiceNewEditForm from '../../sections/@dashboard/invoice/new-edit-form';
 
 const selectedEventSelector = (state) => {
   const { books } = state.book;
@@ -29,7 +57,7 @@ const selectedEventSelector = (state) => {
   return null;
 };
 
-export default function BookList() {
+export default function CustomBookList() {
   const dispatch = useDispatch();
 
   const [page, setPage] = useState(1);
@@ -47,10 +75,61 @@ export default function BookList() {
 
   const { themeStretch } = useSettings();
 
+  // const { control } = useFormContext();
+
+  const isMountedRef = useIsMountedRef();
+
+  const defaultValues = {
+    bookname: '',
+    author: '',
+    isbn: 9874,
+    remeber: true,
+  };
+
+  const methods = useForm({
+    defaultValues,
+  });
+
+  const {
+    reset,
+    setError,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = methods;
+
+  const onSubmit = async (data) => {
+    try {
+      console.log(data);
+      dispatch(getCustomBookslist(data.bookname, data.author, data.isbn));
+    } catch (error) {
+      console.error(error);
+      reset();
+      if (isMountedRef.current) {
+        setError('afterSubmit', { ...error, message: error.response.statusText });
+      }
+    }
+  };
+
   return (
     <Page title="Book: List">
       <Container maxWidth={themeStretch ? false : 'lg'}>
         {/* <Box height={30} /> */}
+
+        <Card>
+          <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
+            <Stack spacing={2} direction={{ xs: 'column', sm: 'row' }} sx={{ p: 3, bgcolor: 'background.neutral' }}>
+              <RHFTextField name="bookname" label="Book name" />
+              <RHFTextField name="author" label="Author name" />
+              <RHFTextField name="isbn" type="number" label="ISBN number" />
+
+              <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>
+                Search
+              </LoadingButton>
+            </Stack>
+          </FormProvider>
+        </Card>
+        <Box height={30} />
+
         <Box
           sx={{
             display: 'grid',
@@ -80,9 +159,10 @@ export default function BookList() {
             <Pagination count={196} page={page} onChange={handleChangepag} />
           </Box>
         </Card> */}
-        <Box sx={{ position: 'relative' }}>
+
+        {/* <Box sx={{ position: 'relative' }}>
           <Pagination count={196} page={page} onChange={handleChangepag} />
-        </Box>
+        </Box> */}
       </Container>
     </Page>
   );

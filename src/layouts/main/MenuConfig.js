@@ -26,8 +26,8 @@ const menuConfig = [
       {
         subheader: 'KnowzaSpace',
         items: [
-          { title: 'App', path: PATH_APP.general.ecommerce },
-          { title: 'Ecommerce', path: PATH_APP.general.ecommerce },
+          { title: 'App', path: PATH_APP.general.app },
+          { title: 'Ecommerce', path: PATH_APP.general.statistics },
         ],
       },
       {

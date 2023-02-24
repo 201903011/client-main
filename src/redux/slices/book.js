@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { title } from 'process';
 // utils
 import axios from '../../utils/axios';
 //
@@ -72,6 +73,76 @@ export function getBookslist(page) {
       const response = await axios.get(`${process.env.REACT_APP_HOST_API_KEY}/api/user/books/get-books?page=${page}`);
       console.log(response.data);
       dispatch(slice.actions.getBooks(response.data.books));
+    } catch (error) {
+      dispatch(slice.actions.hasError(error));
+    }
+  };
+}
+
+// ----------------------------------------------------------------------
+
+export function getCustomBookslist(bookname1, author1, isbn1) {
+  const bookname = bookname1.toString();
+  const author = author1.toString();
+  const isbn = isbn1.toString();
+  console.log(`custom search`);
+  return async () => {
+    dispatch(slice.actions.startLoading());
+    try {
+      if (bookname === '' && author === '' && isbn === '') {
+        const response = await axios.get(`${process.env.REACT_APP_HOST_API_KEY}/api/user/books/search-books`);
+        dispatch(slice.actions.getBooks(response.data.books));
+        return;
+      }
+      if (bookname !== '' && author === '' && isbn === '') {
+        const response = await axios.get(
+          `${process.env.REACT_APP_HOST_API_KEY}/api/user/books/search-books?title=${bookname}`
+        );
+        dispatch(slice.actions.getBooks(response.data.books));
+        return;
+      }
+      if (bookname === '' && author !== '' && isbn === '') {
+        const response = await axios.get(
+          `${process.env.REACT_APP_HOST_API_KEY}/api/user/books/search-books?author=${author}`
+        );
+        dispatch(slice.actions.getBooks(response.data.books));
+        return;
+      }
+      if (bookname === '' && author === '' && isbn !== '') {
+        const response = await axios.get(
+          `${process.env.REACT_APP_HOST_API_KEY}/api/user/books/search-books?isbn=${isbn}`
+        );
+        dispatch(slice.actions.getBooks(response.data.books));
+        return;
+      }
+      if (bookname === '' && author !== '' && isbn !== '') {
+        const response = await axios.get(
+          `${process.env.REACT_APP_HOST_API_KEY}/api/user/books/search-books?author=${author}&isbn=${isbn}`
+        );
+        dispatch(slice.actions.getBooks(response.data.books));
+        return;
+      }
+      if (bookname !== '' && author === '' && isbn !== '') {
+        const response = await axios.get(
+          `${process.env.REACT_APP_HOST_API_KEY}/api/user/books/search-books?title=${bookname}&isbn=${isbn}`
+        );
+        dispatch(slice.actions.getBooks(response.data.books));
+        return;
+      }
+      if (bookname !== '' && author !== '' && isbn === '') {
+        const response = await axios.get(
+          `${process.env.REACT_APP_HOST_API_KEY}/api/user/books/search-books?title=${bookname}&author=${author}`
+        );
+        dispatch(slice.actions.getBooks(response.data.books));
+        return;
+      }
+      if (bookname !== '' && author !== '' && isbn !== '') {
+        const response = await axios.get(
+          `${process.env.REACT_APP_HOST_API_KEY}/api/user/books/search-books?title=${bookname}&author=${author}&isbn=${isbn}`
+        );
+        dispatch(slice.actions.getBooks(response.data.books));
+        return;
+      }
     } catch (error) {
       dispatch(slice.actions.hasError(error));
     }

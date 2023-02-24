@@ -80,22 +80,22 @@ export default function Router() {
       children: [
         { element: <Navigate to={PATH_AFTER_LOGIN} replace />, index: true },
         { path: 'app', element: <BookList /> },
-        { path: 'customsearch', element: <GeneralEcommerce /> },
-        { path: 'statistics', element: <GeneralAnalytics /> },
-        { path: 'fine', element: <GeneralBanking /> },
+        { path: 'customsearch', element: <CustomSearch /> },
+        { path: 'statistics', element: <Statistics /> },
+        { path: 'fine', element: <Fine /> },
 
         {
           path: 'user',
           children: [
             { element: <Navigate to="/lmsapp/user/profile" replace />, index: true },
             { path: 'profile', element: <AppUserProfile /> },
-            { path: 'issued', element: <AppUserCards /> },
-            { path: 'history', element: <AppUserList /> },
+            { path: 'issued', element: <AppUserIssued /> },
+            { path: 'history', element: <AppUserHistory /> },
             { path: 'account', element: <AppUserAccount /> },
           ],
         },
-        { path: 'watchlist', element: <Calendar /> },
-        { path: 'notifications', element: <Kanban /> },
+        { path: 'watchlist', element: <WatchList /> },
+        { path: 'notifications', element: <Notification /> },
       ],
     },
 
@@ -119,29 +119,29 @@ export default function Router() {
           path: 'books',
           children: [
             { element: <Navigate to="/admin/books/add" replace />, index: true },
-            { path: 'add', element: <AdminProfile /> },
-            { path: 'update', element: <AdminAccount /> },
+            { path: 'add', element: <AdminBookAdd /> },
+            { path: 'update', element: <AdminBookUpdate /> },
           ],
         },
         {
           path: 'circulation',
           children: [
             { element: <Navigate to="/admin/circulation/issue" replace />, index: true },
-            { path: 'issue', element: <AdminProfile /> },
-            { path: 'return', element: <AdminAccount /> },
+            { path: 'issue', element: <AdminBookIssue /> },
+            { path: 'return', element: <AdminBookReturn /> },
           ],
         },
-        { path: 'analytics', element: <GeneralAnalytics /> },
-        { path: 'payment', element: <GeneralBanking /> },
-        { path: 'report', element: <GeneralBooking /> },
+        { path: 'analytics', element: <AdminAnalytics /> },
+        { path: 'payment', element: <AdminPayment /> },
+        { path: 'report', element: <AdminReport /> },
 
         {
           path: 'student',
           children: [
             { element: <Navigate to="/admin/student/authorize" replace />, index: true },
-            { path: 'authorize', element: <AdminProfile /> },
-            { path: 'list', element: <AdminAccount /> },
-            { path: 'fine', element: <AdminAccount /> },
+            { path: 'authorize', element: <AdminStudAuthorize /> },
+            { path: 'list', element: <AdminStudList /> },
+            { path: 'fine', element: <AdminStudFine /> },
           ],
         },
         {
@@ -274,24 +274,48 @@ const VerifyCode = Loadable(lazy(() => import('../pages/auth/VerifyCode')));
 
 // LMSAPP
 
-// ADMIN
-
-const AdminBookList = Loadable(lazy(() => import('../pages/admin/BookList')));
-const AdminProfile = Loadable(lazy(() => import('../pages/admin/UserProfile')));
-const AdminCards = Loadable(lazy(() => import('../pages/admin/UserCards')));
-const AdminList = Loadable(lazy(() => import('../pages/admin/UserList')));
-const AdminAccount = Loadable(lazy(() => import('../pages/admin/UserAccount')));
-const AdminCreate = Loadable(lazy(() => import('../pages/admin/UserCreate')));
+// GENERAL
+const BookList = Loadable(lazy(() => import('../pages/lmsapp/BookList')));
+const CustomSearch = Loadable(lazy(() => import('../pages/lmsapp/CustomBookList')));
+const Statistics = Loadable(lazy(() => import('../pages/dashboard/GeneralAnalytics')));
+const Fine = Loadable(lazy(() => import('../pages/lmsapp/UserCards')));
+const AppUserList = Loadable(lazy(() => import('../pages/lmsapp/UserList')));
+//
+const WatchList = Loadable(lazy(() => import('../pages/lmsapp/UserCards')));
+const Notification = Loadable(lazy(() => import('../pages/lmsapp/UserList')));
 
 // USER
-// APP USER
-
-const BookList = Loadable(lazy(() => import('../pages/lmsapp/BookList')));
 const AppUserProfile = Loadable(lazy(() => import('../pages/lmsapp/UserProfile')));
-const AppUserCards = Loadable(lazy(() => import('../pages/lmsapp/UserCards')));
-const AppUserList = Loadable(lazy(() => import('../pages/lmsapp/UserList')));
 const AppUserAccount = Loadable(lazy(() => import('../pages/lmsapp/UserAccount')));
-const AppUserCreate = Loadable(lazy(() => import('../pages/lmsapp/UserCreate')));
+const AppUserIssued = Loadable(lazy(() => import('../pages/lmsapp/BookList')));
+const AppUserHistory = Loadable(lazy(() => import('../pages/lmsapp/UserList')));
+
+// ADMIN
+
+// GENERAL
+const AdminBookList = Loadable(lazy(() => import('../pages/admin/BookList')));
+const AdminAnalytics = Loadable(lazy(() => import('../pages/admin/BookList')));
+const AdminPayment = Loadable(lazy(() => import('../pages/admin/BookList')));
+const AdminReport = Loadable(lazy(() => import('../pages/admin/BookList')));
+
+// BOOKS
+const AdminBookAdd = Loadable(lazy(() => import('../pages/admin/BookList')));
+const AdminBookUpdate = Loadable(lazy(() => import('../pages/admin/BookList')));
+
+// CIRCULATION
+const AdminBookIssue = Loadable(lazy(() => import('../pages/admin/BookList')));
+const AdminBookReturn = Loadable(lazy(() => import('../pages/admin/BookList')));
+
+// STUDENT
+const AdminStudAuthorize = Loadable(lazy(() => import('../pages/admin/BookList')));
+const AdminStudList = Loadable(lazy(() => import('../pages/admin/BookList')));
+const AdminStudFine = Loadable(lazy(() => import('../pages/admin/BookList')));
+
+// USERS
+const AdminProfile = Loadable(lazy(() => import('../pages/admin/UserProfile')));
+const AdminAccount = Loadable(lazy(() => import('../pages/admin/UserAccount')));
+
+// USER
 
 // DASHBOARD
 
