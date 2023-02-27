@@ -277,7 +277,7 @@ const VerifyCode = Loadable(lazy(() => import('../pages/auth/VerifyCode')));
 // GENERAL
 const BookList = Loadable(lazy(() => import('../pages/lmsapp/BookList')));
 const CustomSearch = Loadable(lazy(() => import('../pages/lmsapp/CustomBookList')));
-const Statistics = Loadable(lazy(() => import('../pages/dashboard/GeneralAnalytics')));
+const Statistics = Loadable(lazy(() => import('../pages/lmsapp/new')));
 const Fine = Loadable(lazy(() => import('../pages/lmsapp/UserCards')));
 const AppUserList = Loadable(lazy(() => import('../pages/lmsapp/UserList')));
 //

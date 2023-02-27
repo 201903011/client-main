@@ -27,12 +27,17 @@ export default function AboutTeam() {
     },
     {
       id: '2',
+      name: 'Manjiri Tare',
+      role: 'UI/UX design',
+      avatar:
+        'https://pps.whatsapp.net/v/t61.24694-24/300119380_210860194931470_2259660586385404550_n.jpg?ccb=11-4&oh=01_AdRZOkXbZvJ2za4o4xu7wIUpvmry2VqPgaekTuTnkwpGXg&oe=64086864',
+    },
+    {
+      id: '3',
       name: `Martina D'Souza`,
       role: 'Project Guide',
       avatar: 'https://www.xavier.ac.in/xvadmin/images/profiles/10012020104318.png',
     },
-
-    { id: '3', name: 'Manjiri Tare', role: 'UI/UX design', avatar: '' },
     {
       id: '4',
       name: 'Dipali Ghararte',
