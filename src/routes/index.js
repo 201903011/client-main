@@ -83,6 +83,7 @@ export default function Router() {
         { path: 'customsearch', element: <CustomSearch /> },
         { path: 'statistics', element: <Statistics /> },
         { path: 'fine', element: <Fine /> },
+        { path: 'issue', element: <Issue /> },
 
         {
           path: 'user',
@@ -279,7 +280,7 @@ const BookList = Loadable(lazy(() => import('../pages/lmsapp/BookList')));
 const CustomSearch = Loadable(lazy(() => import('../pages/lmsapp/CustomBookList')));
 const Statistics = Loadable(lazy(() => import('../pages/lmsapp/new')));
 const Fine = Loadable(lazy(() => import('../pages/lmsapp/new')));
-const AppUserList = Loadable(lazy(() => import('../pages/lmsapp/new')));
+const Issue = Loadable(lazy(() => import('../pages/lmsapp/BookIssue')));
 //
 const WatchList = Loadable(lazy(() => import('../pages/lmsapp/new')));
 const Notification = Loadable(lazy(() => import('../pages/lmsapp/new')));
@@ -287,16 +288,16 @@ const Notification = Loadable(lazy(() => import('../pages/lmsapp/new')));
 // USER
 const AppUserProfile = Loadable(lazy(() => import('../pages/lmsapp/UserProfile')));
 const AppUserAccount = Loadable(lazy(() => import('../pages/lmsapp/UserAccount')));
-const AppUserIssued = Loadable(lazy(() => import('../pages/lmsapp/BookList')));
+const AppUserIssued = Loadable(lazy(() => import('../pages/lmsapp/InvoiceList')));
 const AppUserHistory = Loadable(lazy(() => import('../pages/lmsapp/UserList')));
 
 // ADMIN
 
 // GENERAL
 const AdminBookList = Loadable(lazy(() => import('../pages/admin/BookList')));
-const AdminAnalytics = Loadable(lazy(() => import('../pages/admin/BookList')));
-const AdminPayment = Loadable(lazy(() => import('../pages/admin/BookList')));
-const AdminReport = Loadable(lazy(() => import('../pages/admin/BookList')));
+const AdminAnalytics = Loadable(lazy(() => import('../pages/admin/Analytics')));
+const AdminPayment = Loadable(lazy(() => import('../pages/admin/Payment')));
+const AdminReport = Loadable(lazy(() => import('../pages/admin/Report')));
 
 // BOOKS
 const AdminBookAdd = Loadable(lazy(() => import('../pages/admin/BookAdd')));
@@ -304,12 +305,12 @@ const AdminBookUpdate = Loadable(lazy(() => import('../pages/admin/BookUpdate'))
 
 // CIRCULATION
 const AdminBookIssue = Loadable(lazy(() => import('../pages/admin/BookList')));
-const AdminBookReturn = Loadable(lazy(() => import('../pages/admin/BookList')));
+const AdminBookReturn = Loadable(lazy(() => import('../pages/admin/ReturnBook')));
 
 // STUDENT
-const AdminStudAuthorize = Loadable(lazy(() => import('../pages/admin/BookList')));
-const AdminStudList = Loadable(lazy(() => import('../pages/admin/BookList')));
-const AdminStudFine = Loadable(lazy(() => import('../pages/admin/BookList')));
+const AdminStudAuthorize = Loadable(lazy(() => import('../pages/admin/StudentAuth')));
+const AdminStudList = Loadable(lazy(() => import('../pages/admin/StudentList')));
+const AdminStudFine = Loadable(lazy(() => import('../pages/admin/StudentFine')));
 
 // USERS
 const AdminProfile = Loadable(lazy(() => import('../pages/admin/UserProfile')));

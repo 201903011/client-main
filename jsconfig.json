@@ -6,7 +6,7 @@
   },
   "include": [
     "src/**/*"
-  ],
+, "src/pages/lmsapp/.js"  ],
   "exclude": [
     "node_modules"
   ]

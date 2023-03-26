@@ -46,7 +46,7 @@ const navConfig = [
         path: PATH_APP_ADMIN.circulation.circ,
         icon: ICONS.ecommerce,
         children: [
-          { title: 'Issue book', path: PATH_APP_ADMIN.circulation.issue },
+          // { title: 'Issue book', path: PATH_APP_ADMIN.circulation.issue },
           { title: 'Return book', path: PATH_APP_ADMIN.circulation.return },
           // { title: 'Authorize student', path: PATH_APP_ADMIN.circulation.return },
         ],

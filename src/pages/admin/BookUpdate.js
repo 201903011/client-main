@@ -24,6 +24,8 @@ import {
   Alert,
   IconButton,
   InputAdornment,
+  Typography,
+  Grid,
 } from '@mui/material';
 // redux
 import { useDispatch, useSelector } from '../../redux/store';
@@ -75,8 +77,6 @@ export default function BookUpdate() {
 
   const { themeStretch } = useSettings();
 
-  // const { control } = useFormContext();
-
   const isMountedRef = useIsMountedRef();
 
   const defaultValues = {
@@ -120,24 +120,167 @@ export default function BookUpdate() {
           <Stack spacing={3}>
             {!!errors.afterSubmit && <Alert severity="error">{errors.afterSubmit.message}</Alert>}
 
-            <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+            {/* <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
               <RHFTextField name="firstName" label="First name" />
               <RHFTextField name="midName" label="Middle name" />
               <RHFTextField name="lastName" label="Last name" />
-            </Stack>
+            </Stack> */}
 
-            <RHFTextField name="email" label="Email address" />
+            <Box
+              sx={{
+                display: 'grid',
+                gridTemplateColumns: {
+                  xs: 'repeat(1, 1fr)',
+                  md: 'repeat(2, 1fr)',
+                },
+                gap: 3,
+              }}
+            >
+              <RHFTextField name="isbn" type="number" label="ISBN no" />
 
-            <RHFTextField name="phone" type="number" label="Phone no" />
+              <Box
+                sx={{
+                  display: 'grid',
+                  gridTemplateColumns: {
+                    xs: 'repeat(1, 1fr)',
+                    md: 'repeat(2, 1fr)',
+                  },
+                  gap: 2,
+                  alignItems: 'center',
+                }}
+              >
+                <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>
+                  Scan By QR
+                </LoadingButton>
 
-            <RHFTextField name="address" type="text" label="Address" />
+                <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>
+                  Get Book Details
+                </LoadingButton>
+              </Box>
+            </Box>
 
-            <RHFTextField name="grno" label="XIE ID" />
+            <Box
+              sx={{
+                display: 'grid',
+                gridTemplateColumns: {
+                  xs: 'repeat(1, 1fr)',
+                  md: 'repeat(2, 1fr)',
+                },
+                gap: 1,
+              }}
+            >
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <Typography variant="body2" color="text.primary">
+                  Title
+                </Typography>
+              </Box>
+              <Box sx={{}}>
+                <RHFTextField name="title" type="string" label="title" />
+              </Box>
+            </Box>
 
-            <RHFTextField name="password" label="Password" type={'password'} />
+            <Box
+              sx={{
+                display: 'grid',
+                gridTemplateColumns: {
+                  xs: 'repeat(1, 1fr)',
+                  md: 'repeat(2, 1fr)',
+                },
+                gap: 1,
+              }}
+            >
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <Typography variant="body2" color="text.primary">
+                  Published year
+                </Typography>
+              </Box>
+              <Box sx={{}}>
+                <RHFTextField name="pubyear" type="number" label="Published year" />
+              </Box>
+            </Box>
+
+            <Box
+              sx={{
+                display: 'grid',
+                gridTemplateColumns: {
+                  xs: 'repeat(1, 1fr)',
+                  md: 'repeat(2, 1fr)',
+                },
+                gap: 1,
+              }}
+            >
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <Typography variant="body2" color="text.primary">
+                  Author
+                </Typography>
+              </Box>
+              <Box sx={{}}>
+                <RHFTextField name="author" type="string" label="Author" />
+              </Box>
+            </Box>
+
+            <Box
+              sx={{
+                display: 'grid',
+                gridTemplateColumns: {
+                  xs: 'repeat(1, 1fr)',
+                  md: 'repeat(2, 1fr)',
+                },
+                gap: 1,
+              }}
+            >
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <Typography variant="body2" color="text.primary">
+                  Price
+                </Typography>
+              </Box>
+              <Box sx={{}}>
+                <RHFTextField name="price" type="number" label="Price" />
+              </Box>
+            </Box>
+
+            <Box
+              sx={{
+                display: 'grid',
+                gridTemplateColumns: {
+                  xs: 'repeat(1, 1fr)',
+                  md: 'repeat(2, 1fr)',
+                },
+                gap: 1,
+              }}
+            >
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <Typography variant="body2" color="text.primary">
+                  Publisher
+                </Typography>
+              </Box>
+              <Box sx={{}}>
+                <RHFTextField name="publisher" type="string" label="Publisher" />
+              </Box>
+            </Box>
+
+            <Box
+              sx={{
+                display: 'grid',
+                gridTemplateColumns: {
+                  xs: 'repeat(1, 1fr)',
+                  md: 'repeat(2, 1fr)',
+                },
+                gap: 1,
+              }}
+            >
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <Typography variant="body2" color="text.primary">
+                  Pages
+                </Typography>
+              </Box>
+              <Box sx={{}}>
+                <RHFTextField name="pages" type="number" label="Pages" />
+              </Box>
+            </Box>
 
             <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>
-              Register
+              Update Book
             </LoadingButton>
           </Stack>
         </FormProvider>

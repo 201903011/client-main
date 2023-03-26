@@ -41,6 +41,7 @@ export const PATH_APP = {
     customsearch: path(ROOTS_APP, '/customsearch'),
     statistics: path(ROOTS_APP, '/statistics'),
     fine: path(ROOTS_APP, '/fine'),
+    issue: path(ROOTS_APP, '/issue'),
     watchlist: path(ROOTS_APP, '/watchlist'),
     notifications: path(ROOTS_APP, '/notifications'),
   },

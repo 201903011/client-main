@@ -39,6 +39,7 @@ const navConfig = [
       { title: 'custom search', path: PATH_APP.general.customsearch, icon: ICONS.search },
       { title: 'statistics', path: PATH_APP.general.statistics, icon: ICONS.analytics },
       { title: 'pay fine', path: PATH_APP.general.fine, icon: ICONS.banking },
+      { title: 'issue', path: PATH_APP.general.issue, icon: ICONS.banking },
     ],
   },
 

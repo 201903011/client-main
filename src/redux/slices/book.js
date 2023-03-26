@@ -11,6 +11,8 @@ const initialState = {
   isLoading: false,
   error: null,
   books: [],
+  issuedData: [],
+  message: '',
 };
 
 const slice = createSlice({
@@ -34,6 +36,11 @@ const slice = createSlice({
       state.books = action.payload;
     },
 
+    getIssuedBooksData(state, action) {
+      state.isLoading = false;
+      state.issuedData = action.payload;
+    },
+
     // CREATE EVENT
     createBooks(state, action) {
       const newEvent = action.payload;
@@ -54,6 +61,18 @@ const slice = createSlice({
       state.isLoading = false;
       state.events = updateEvent;
     },
+
+    // ISSUE BOOKS
+    issueBooks(state) {
+      state.isLoading = false;
+      state.message = 'Issued Successfully';
+    },
+
+    // ISSUE BOOKS
+    returnBooks(state) {
+      state.isLoading = false;
+      state.message = 'Return Successfully';
+    },
   },
 });
 
@@ -61,8 +80,93 @@ const slice = createSlice({
 export default slice.reducer;
 
 // Actions
-export const { getBooks, updateBooks, createBooks } = slice.actions;
+export const { getBooks, updateBooks, createBooks, issueBooks, returnBooks, getIssuedBooksData } = slice.actions;
 
+// ----------------------------------------------------------------------
+
+export function issueBookbyuser(acno, id, token) {
+  console.log(`accession no to issue ${acno}`);
+  return async () => {
+    dispatch(slice.actions.startLoading());
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_HOST_API_KEY_USER}/user/issue/issue-book`,
+        {
+          accession_number: acno,
+          student_id: id,
+        },
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+            'Content-type': 'application/json',
+          },
+        }
+      );
+      console.log(response.data);
+      dispatch(slice.actions.issueBooks());
+    } catch (error) {
+      console.log(error);
+      dispatch(slice.actions.hasError(error));
+    }
+  };
+}
+
+// ----------------------------------------------------------------------
+
+export function returnBookbyadmin(acno, id, token) {
+  console.log(`accession no to issue ${acno}`);
+  return async () => {
+    dispatch(slice.actions.startLoading());
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_HOST_API_KEY_ADMIN}/issue/return-book`,
+        {
+          accession_number: acno,
+          returned_to: id,
+        },
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+            'Content-type': 'application/json',
+          },
+        }
+      );
+      console.log(response.data);
+      dispatch(slice.actions.getIssuedBooksData(response.data));
+    } catch (error) {
+      console.log(error);
+      dispatch(slice.actions.hasError(error));
+    }
+  };
+}
+
+// ----------------------------------------------------------------------
+
+export function getIssueBookslist(id, token) {
+  // console.log(`accession no to issue ${acno}`);
+  return async () => {
+    dispatch(slice.actions.startLoading());
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_HOST_API_KEY_USER}/user/issue/get-info`,
+        {
+          student_id: id,
+        },
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+            'Content-type': 'application/json',
+          },
+        }
+      );
+      // console.log(typeof response.data.data);
+      dispatch(slice.actions.getIssuedBooksData(response.data.data));
+    } catch (error) {
+      console.log(error);
+      dispatch(slice.actions.hasError(error));
+    }
+  };
+}
 // ----------------------------------------------------------------------
 
 export function getBookslist(page) {
