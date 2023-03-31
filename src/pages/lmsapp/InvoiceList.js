@@ -2,6 +2,7 @@ import sumBy from 'lodash/sumBy';
 import { useState } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import moment from 'moment/moment';
+import { differenceInBusinessDays } from 'date-fns';
 // @mui
 import { useTheme } from '@mui/material/styles';
 import {
@@ -40,6 +41,8 @@ import { TableEmptyRows, TableHeadCustom, TableNoData, TableSelectedActions } fr
 // sections
 import InvoiceAnalytic from '../../sections/@Lmsapp/issued/InvoiceAnalytic';
 import { InvoiceTableRow, InvoiceTableToolbar } from '../../sections/@Lmsapp/issued/list';
+// utils
+import { fDate, fDateCustom, fDateDifference } from '../../utils/formatTime';
 
 // ----------------------------------------------------------------------
 
@@ -368,10 +371,30 @@ export default function InvoiceList() {
 
   const TABS = [
     { value: 'all', label: 'All', color: 'info', count: tableData.length },
-    { value: 'Issued', label: 'Issued', color: 'success', count: getLengthByStatus('paid') },
-    { value: 'Return', label: 'Return', color: 'warning', count: getLengthByStatus('unpaid') },
+    { value: 'Issued', label: 'Issued', color: 'success', count: getLengthByStatus('issued') },
+    { value: 'Return', label: 'Return', color: 'warning', count: getLengthByStatus('return') },
     { value: 'Overdue', label: 'Overdue', color: 'error', count: getLengthByStatus('overdue') },
   ];
+
+  const CalculateStatus = (item) => {
+    // if(returnDate != null  ){
+        
+    // }
+    // const issuedDate = new Date(moment(item.issued_on, 'DD/MM/YYYY').toDate().toISOString());
+    // const returnDate = item.returned_on.toISOString().getTime();
+    // const dueDate = new Date(moment(item.return_by, 'DD/MM/YYYY').toDate().toISOString());
+    
+    // if(differenceInBusinessDays(dueDate,returnDate) > 0 ){
+    //   return 'overdue' ;
+    // }
+    // else{
+    //   if(returnDate == null ){
+
+    //   }
+    // }
+    
+  }
+
 
   return (
     <Page title="User: Issued Books">
@@ -412,17 +435,17 @@ export default function InvoiceList() {
               />
               <InvoiceAnalytic
                 title="Issued"
-                total={getLengthByStatus('paid')}
-                percent={getPercentByStatus('paid')}
-                price={getTotalPriceByStatus('paid')}
+                total={getLengthByStatus('issued')}
+                percent={getPercentByStatus('issued')}
+                price={getTotalPriceByStatus('issued')}
                 icon="eva:checkmark-circle-2-fill"
                 color={theme.palette.success.main}
               />
               <InvoiceAnalytic
                 title="Return"
-                total={getLengthByStatus('unpaid')}
-                percent={getPercentByStatus('unpaid')}
-                price={getTotalPriceByStatus('unpaid')}
+                total={getLengthByStatus('return')}
+                percent={getPercentByStatus('return')}
+                price={getTotalPriceByStatus('return')}
                 icon="eva:clock-fill"
                 color={theme.palette.warning.main}
               />

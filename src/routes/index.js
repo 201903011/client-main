@@ -278,8 +278,8 @@ const VerifyCode = Loadable(lazy(() => import('../pages/auth/VerifyCode')));
 // GENERAL
 const BookList = Loadable(lazy(() => import('../pages/lmsapp/BookList')));
 const CustomSearch = Loadable(lazy(() => import('../pages/lmsapp/CustomBookList')));
-const Statistics = Loadable(lazy(() => import('../pages/lmsapp/new')));
-const Fine = Loadable(lazy(() => import('../pages/lmsapp/new')));
+const Statistics = Loadable(lazy(() => import('../pages/lmsapp/GeneralBooking')));
+const Fine = Loadable(lazy(() => import('../pages/lmsapp/Payment')));
 const Issue = Loadable(lazy(() => import('../pages/lmsapp/BookIssue')));
 //
 const WatchList = Loadable(lazy(() => import('../pages/lmsapp/new')));
@@ -295,7 +295,7 @@ const AppUserHistory = Loadable(lazy(() => import('../pages/lmsapp/UserList')));
 
 // GENERAL
 const AdminBookList = Loadable(lazy(() => import('../pages/admin/BookList')));
-const AdminAnalytics = Loadable(lazy(() => import('../pages/admin/Analytics')));
+const AdminAnalytics = Loadable(lazy(() => import('../pages/admin/GeneralAnalytics')));
 const AdminPayment = Loadable(lazy(() => import('../pages/admin/Payment')));
 const AdminReport = Loadable(lazy(() => import('../pages/admin/Report')));
 

@@ -56,7 +56,7 @@ const navConfig = [
         children: [
           { title: 'profile', path: PATH_APP.user.profile },
           { title: 'issued books', path: PATH_APP.user.issued },
-          { title: 'history', path: PATH_APP.user.history },
+          // { title: 'history', path: PATH_APP.user.history },
         ],
       },
 
