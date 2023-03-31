@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import { Tab, Box, Card, Tabs, Container } from '@mui/material';
 // routes
-import { PATH_DASHBOARD } from '../../routes/paths';
+import {  PATH_APP } from '../../routes/paths';
 // hooks
 import useAuth from '../../hooks/useAuth';
 import useTabs from '../../hooks/useTabs';
@@ -89,8 +89,8 @@ export default function UserProfile() {
         <HeaderBreadcrumbs
           heading="Profile"
           links={[
-            { name: 'Dashboard', href: PATH_DASHBOARD.root },
-            { name: 'User', href: PATH_DASHBOARD.user.root },
+            { name: 'Admin', href: PATH_APP.root },
+            { name: 'User', href: PATH_APP.user.root },
             { name: user?.name || '' },
           ]}
         />

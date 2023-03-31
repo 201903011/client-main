@@ -15,7 +15,7 @@ import {
   AnalyticsWidgetSummary,
   AnalyticsCurrentSubject,
   AnalyticsConversionRates,
-} from '../../sections/@Lmsapp/general/analytics';
+} from '../../sections/@admin/general/analytics';
 
 // ----------------------------------------------------------------------
 
@@ -31,24 +31,24 @@ export default function GeneralAnalytics() {
 
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6} md={3}>
-            <AnalyticsWidgetSummary title="Weekly Sales" total={714000} icon={'ant-design:android-filled'} />
+            <AnalyticsWidgetSummary title="Weekly Issued" total={78} icon={'ant-design:android-filled'} />
           </Grid>
 
           <Grid item xs={12} sm={6} md={3}>
-            <AnalyticsWidgetSummary title="New Users" total={1352831} color="info" icon={'ant-design:apple-filled'} />
+            <AnalyticsWidgetSummary title="New Users" total={245} color="info" icon={'ant-design:apple-filled'} />
           </Grid>
 
           <Grid item xs={12} sm={6} md={3}>
             <AnalyticsWidgetSummary
-              title="Item Orders"
-              total={1723315}
+              title="Weekly Returns"
+              total={56}
               color="warning"
               icon={'ant-design:windows-filled'}
             />
           </Grid>
 
           <Grid item xs={12} sm={6} md={3}>
-            <AnalyticsWidgetSummary title="Bug Reports" total={234} color="error" icon={'ant-design:bug-filled'} />
+            <AnalyticsWidgetSummary title="Fine collected" total={2530} color="error" icon={'ant-design:bug-filled'} />
           </Grid>
 
           <Grid item xs={12} md={6} lg={8}>
@@ -67,7 +67,7 @@ export default function GeneralAnalytics() {
             <AnalyticsCurrentSubject />
           </Grid>
 
-          <Grid item xs={12} md={6} lg={8}>
+          {/* <Grid item xs={12} md={6} lg={8}>
             <AnalyticsNewsUpdate />
           </Grid>
 
@@ -81,7 +81,7 @@ export default function GeneralAnalytics() {
 
           <Grid item xs={12} md={6} lg={8}>
             <AnalyticsTasks />
-          </Grid>
+          </Grid> */}
         </Grid>
       </Container>
     </Page>

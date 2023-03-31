@@ -64,7 +64,7 @@ export default function Profile({ myProfile }) {
             <ProfilePostCard key={post.id} post={post} />
           ))}
         </Stack> */}
-        <ProfileFollowers subjects={_userFollowers} />
+        {/* <ProfileFollowers subjects={_userFollowers} /> */}
       </Grid>
     </Grid>
   );
