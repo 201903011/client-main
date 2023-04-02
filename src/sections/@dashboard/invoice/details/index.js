@@ -23,6 +23,7 @@ import Image from '../../../../components/Image';
 import Scrollbar from '../../../../components/Scrollbar';
 //
 import InvoiceToolbar from './InvoiceToolbar';
+import InvoicePDF from './InvoicePDF';
 
 // ----------------------------------------------------------------------
 
@@ -63,6 +64,10 @@ export default function InvoiceDetails({ invoice }) {
   return (
     <>
       <InvoiceToolbar invoice={invoice} />
+
+      {/* <Card>
+        <InvoicePDF invoice={invoice} />
+      </Card> */}
 
       <Card sx={{ pt: 5, px: 5 }}>
         <Grid container>

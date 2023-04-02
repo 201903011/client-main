@@ -19,6 +19,10 @@ export function fDateCustom(date) {
   return format(new Date(dateobj.toISOString()), 'dd/MM/yyyy');
 }
 
+export function fDateCustomISO(date) {
+  return format(new Date(date), 'dd/MM/yyyy');
+}
+
 export function fDateDifference(date1, date2) {
   // console.log(date);
   let ans = 0;
