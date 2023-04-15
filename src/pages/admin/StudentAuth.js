@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import * as Yup from 'yup';
 import { Link as RouterLink } from 'react-router-dom';
+import { useSnackbar } from 'notistack';
 // form
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -35,6 +36,7 @@ import {
   issueBookbyuser,
   issueBooks,
   returnBookbyadmin,
+  authStudentbyadmin,
 } from '../../redux/slices/book';
 // routes
 import { PATH_AUTH } from '../../routes/paths';
@@ -60,12 +62,14 @@ import InvoiceNewEditForm from '../../sections/@dashboard/invoice/new-edit-form'
 const selectedEventSelector = (state) => {
   const { books } = state.book;
   if (books != null) {
-    return books;
+    return books; 
   }
   return null;
 };
 
 export default function ReturnBook() {
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+
   const dispatch = useDispatch();
 
   const [page, setPage] = useState(1);
@@ -98,10 +102,11 @@ export default function ReturnBook() {
     try {
       const accessToken = window.localStorage.getItem('accessToken');
       console.log(accessToken);
-      console.log(typeof parseInt(data.accessionNo.toString(), 10), typeof user._id, typeof accessToken);
+      // console.log(typeof parseInt(data.accessionNo.toString(), 10), typeof user._id, typeof accessToken);
       dispatch(
-        returnBookbyadmin(parseInt(data.accessionNo.toString(), 10), user._id.toString(), accessToken.toString())
+        authStudentbyadmin(data.email, accessToken.toString())
       );
+      enqueueSnackbar('Authorized successfully!');
     } catch (error) {
       console.error(error);
       reset();

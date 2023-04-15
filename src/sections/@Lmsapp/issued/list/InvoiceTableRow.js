@@ -84,7 +84,7 @@ export default function InvoiceTableRow({ row, selected, onSelectRow, onViewRow,
         {row.returned_on !== null && diff > 0 ? diff : '0'}
       </TableCell>
 
-      <TableCell align="left">
+      {/* <TableCell align="left">
         <Label
           variant={theme.palette.mode === 'light' ? 'ghost' : 'filled'}
           color={
@@ -97,7 +97,7 @@ export default function InvoiceTableRow({ row, selected, onSelectRow, onViewRow,
         >
           paid
         </Label>
-      </TableCell>
+      </TableCell> */}
 
       {/* <TableCell align="right">
         <TableMoreMenu

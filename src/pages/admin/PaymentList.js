@@ -1,5 +1,5 @@
 import sumBy from 'lodash/sumBy';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import moment from 'moment/moment';
 import { differenceInBusinessDays } from 'date-fns';
@@ -23,6 +23,9 @@ import {
   TablePagination,
   FormControlLabel,
 } from '@mui/material';
+// redux
+import { useDispatch, useSelector } from '../../redux/store';
+import { getEvents } from '../../redux/slices/payment';
 // routes
 import { PATH_APP } from '../../routes/paths';
 // hooks
@@ -43,6 +46,7 @@ import InvoiceAnalytic from '../../sections/@admin/issued/InvoiceAnalytic';
 import { InvoiceTableRow, InvoiceTableToolbar } from '../../sections/@admin/issued/list';
 // utils
 import { fDate, fDateCustom, fDateDifference } from '../../utils/formatTime';
+import { token } from 'stylis';
 
 // ----------------------------------------------------------------------
 
@@ -71,7 +75,26 @@ const TABLE_HEAD = [
 //   "__v": 0
 // }
 
+const selectedEventSelector = (state) => {
+  const { paymentdata } = state.payment;
+  if (paymentdata != null) {
+    return paymentdata;
+  }
+  return [];
+};
+
 export default function InvoiceList() {
+
+  const dispatch = useDispatch();
+
+  const tableData = useSelector(selectedEventSelector);
+
+  console.log("dispatch");
+  useEffect(() => {
+    const accessToken = window.localStorage.getItem('accessToken');
+    dispatch(getEvents(accessToken.toString()));
+  }, [dispatch]);
+
   const theme = useTheme();
 
   const { themeStretch } = useSettings();
@@ -98,208 +121,208 @@ export default function InvoiceList() {
   } = useTable({ defaultOrderBy: 'createDate' });
 
   console.log(_invoices[0].createDate);
-  const [tableData, setTableData] = useState([
-    {
-      _id: '640c383947166ea3b54ac597',
-      accession_number: 18,
-      student_id: '63db3b261f1b94e1eabe8bbb',
-      issued_on: '11/03/2023',
-      return_by: '18/03/2023',
-      returned_on: null,
-      returned_to: null,
-      __v: 0,
-    },
-    {
-      _id: '640c3c54f4cd114a30eee04a',
-      accession_number: 1245,
-      student_id: '63db3b261f1b94e1eabe8bbb',
-      issued_on: '11/03/2023',
-      return_by: '18/03/2023',
-      returned_on: '2023-03-12T04:54:44.544Z',
-      returned_to: '63dfa7370c0497cc25ed3ff8',
-      __v: 0,
-    },
-    {
-      _id: '640d5b3ab5cc39335840a35c',
-      accession_number: 1245,
-      student_id: '63db3b261f1b94e1eabe8bbb',
-      issued_on: '12/03/2023',
-      return_by: '19/03/2023',
-      returned_on: '2023-03-12T05:28:56.682Z',
-      returned_to: '63dfa7370c0497cc25ed3ff8',
-      __v: 0,
-    },
-    {
-      _id: '640d5bdab5cc39335840a3a0',
-      accession_number: 1245,
-      student_id: '63db3b261f1b94e1eabe8bbb',
-      issued_on: '12/03/2023',
-      return_by: '19/03/2023',
-      returned_on: null,
-      returned_to: null,
-      __v: 0,
-    },
-    {
-      _id: '640d5be4b5cc39335840a3ab',
-      accession_number: 1245,
-      student_id: '63db3b261f1b94e1eabe8bbb',
-      issued_on: '12/03/2023',
-      return_by: '19/03/2023',
-      returned_on: null,
-      returned_to: null,
-      __v: 0,
-    },
-    {
-      _id: '640d5beab5cc39335840a3b6',
-      accession_number: 1245,
-      student_id: '63db3b261f1b94e1eabe8bbb',
-      issued_on: '12/03/2023',
-      return_by: '19/03/2023',
-      returned_on: null,
-      returned_to: null,
-      __v: 0,
-    },
-    {
-      _id: '640d5c33b5cc39335840a3ee',
-      accession_number: 1245,
-      student_id: '63db3b261f1b94e1eabe8bbb',
-      issued_on: '12/03/2023',
-      return_by: '19/03/2023',
-      returned_on: null,
-      returned_to: null,
-      __v: 0,
-    },
-    {
-      _id: '640d5c9eb5cc39335840a41d',
-      accession_number: 182,
-      student_id: '63db3b261f1b94e1eabe8bbb',
-      issued_on: '12/03/2023',
-      return_by: '19/03/2023',
-      returned_on: '2023-03-12T05:03:07.816Z',
-      returned_to: '63dfa7370c0497cc25ed3ff8',
-      __v: 0,
-    },
-    {
-      _id: '640d5de7b5cc39335840a467',
-      accession_number: 182,
-      student_id: '63db3b261f1b94e1eabe8bbb',
-      issued_on: '12/03/2023',
-      return_by: '19/03/2023',
-      returned_on: null,
-      returned_to: null,
-      __v: 0,
-    },
-    {
-      _id: '640d5debb5cc39335840a472',
-      accession_number: 1,
-      student_id: '63db3b261f1b94e1eabe8bbb',
-      issued_on: '12/03/2023',
-      return_by: '19/03/2023',
-      returned_on: '2023-03-12T05:29:06.602Z',
-      returned_to: '63dfa7370c0497cc25ed3ff8',
-      __v: 0,
-    },
-    {
-      _id: '640d5df1b5cc39335840a47d',
-      accession_number: 4,
-      student_id: '63db3b261f1b94e1eabe8bbb',
-      issued_on: '12/03/2023',
-      return_by: '19/03/2023',
-      returned_on: '2023-03-12T05:09:41.071Z',
-      returned_to: '63dfa7370c0497cc25ed3ff8',
-      __v: 0,
-    },
-    {
-      _id: '640d5dfab5cc39335840a488',
-      accession_number: 5,
-      student_id: '63db3b261f1b94e1eabe8bbb',
-      issued_on: '12/03/2023',
-      return_by: '19/03/2023',
-      returned_on: '2023-03-12T05:30:09.835Z',
-      returned_to: '63dfa7370c0497cc25ed3ff8',
-      __v: 0,
-    },
-    {
-      _id: '640d5dffb5cc39335840a493',
-      accession_number: 6,
-      student_id: '63db3b261f1b94e1eabe8bbb',
-      issued_on: '12/03/2023',
-      return_by: '19/03/2023',
-      returned_on: '2023-03-12T05:09:51.092Z',
-      returned_to: '63dfa7370c0497cc25ed3ff8',
-      __v: 0,
-    },
-    {
-      _id: '640d5f53b5cc39335840a4b6',
-      accession_number: 1245,
-      student_id: '63db3b261f1b94e1eabe8bbb',
-      issued_on: '12/03/2023',
-      return_by: '19/03/2023',
-      returned_on: null,
-      returned_to: null,
-      __v: 0,
-    },
-    {
-      _id: '640d5fe2b5cc39335840a4d5',
-      accession_number: 1,
-      student_id: '63db3b261f1b94e1eabe8bbb',
-      issued_on: '12/03/2023',
-      return_by: '19/03/2023',
-      returned_on: null,
-      returned_to: null,
-      __v: 0,
-    },
-    {
-      _id: '640d6018b5cc39335840a4f4',
-      accession_number: 17,
-      student_id: '63db3b261f1b94e1eabe8bbb',
-      issued_on: '12/03/2023',
-      return_by: '19/03/2023',
-      returned_on: '2023-03-12T05:21:57.873Z',
-      returned_to: '63dfa7370c0497cc25ed3ff8',
-      __v: 0,
-    },
-    {
-      _id: '640d601fb5cc39335840a4ff',
-      accession_number: 19,
-      student_id: '63db3b261f1b94e1eabe8bbb',
-      issued_on: '12/03/2023',
-      return_by: '19/03/2023',
-      returned_on: null,
-      returned_to: null,
-      __v: 0,
-    },
-    {
-      _id: '640d6024b5cc39335840a50a',
-      accession_number: 26,
-      student_id: '63db3b261f1b94e1eabe8bbb',
-      issued_on: '12/03/2023',
-      return_by: '19/03/2023',
-      returned_on: '2023-03-12T05:21:44.426Z',
-      returned_to: '63dfa7370c0497cc25ed3ff8',
-      __v: 0,
-    },
-    {
-      _id: '640d7350b5cc39335840a557',
-      accession_number: 1245,
-      student_id: '63db3b261f1b94e1eabe8bbb',
-      issued_on: '12/03/2023',
-      return_by: '19/03/2023',
-      returned_on: null,
-      returned_to: null,
-      __v: 0,
-    },
-    {
-      _id: '640d82e3b5cc39335840a6e5',
-      accession_number: 1,
-      student_id: '63db3b261f1b94e1eabe8bbb',
-      issued_on: '12/03/2023',
-      return_by: '19/03/2023',
-      returned_on: null,
-      returned_to: null,
-      __v: 0,
-    },
-  ]);
+  // const [tableData, setTableData] = useState([
+  //   {
+  //     _id: '640c383947166ea3b54ac597',
+  //     accession_number: 18,
+  //     student_id: '63db3b261f1b94e1eabe8bbb',
+  //     issued_on: '11/03/2023',
+  //     return_by: '18/03/2023',
+  //     returned_on: null,
+  //     returned_to: null,
+  //     __v: 0,
+  //   },
+  //   {
+  //     _id: '640c3c54f4cd114a30eee04a',
+  //     accession_number: 1245,
+  //     student_id: '63db3b261f1b94e1eabe8bbb',
+  //     issued_on: '11/03/2023',
+  //     return_by: '18/03/2023',
+  //     returned_on: '2023-03-12T04:54:44.544Z',
+  //     returned_to: '63dfa7370c0497cc25ed3ff8',
+  //     __v: 0,
+  //   },
+  //   {
+  //     _id: '640d5b3ab5cc39335840a35c',
+  //     accession_number: 1245,
+  //     student_id: '63db3b261f1b94e1eabe8bbb',
+  //     issued_on: '12/03/2023',
+  //     return_by: '19/03/2023',
+  //     returned_on: '2023-03-12T05:28:56.682Z',
+  //     returned_to: '63dfa7370c0497cc25ed3ff8',
+  //     __v: 0,
+  //   },
+  //   {
+  //     _id: '640d5bdab5cc39335840a3a0',
+  //     accession_number: 1245,
+  //     student_id: '63db3b261f1b94e1eabe8bbb',
+  //     issued_on: '12/03/2023',
+  //     return_by: '19/03/2023',
+  //     returned_on: null,
+  //     returned_to: null,
+  //     __v: 0,
+  //   },
+  //   {
+  //     _id: '640d5be4b5cc39335840a3ab',
+  //     accession_number: 1245,
+  //     student_id: '63db3b261f1b94e1eabe8bbb',
+  //     issued_on: '12/03/2023',
+  //     return_by: '19/03/2023',
+  //     returned_on: null,
+  //     returned_to: null,
+  //     __v: 0,
+  //   },
+  //   {
+  //     _id: '640d5beab5cc39335840a3b6',
+  //     accession_number: 1245,
+  //     student_id: '63db3b261f1b94e1eabe8bbb',
+  //     issued_on: '12/03/2023',
+  //     return_by: '19/03/2023',
+  //     returned_on: null,
+  //     returned_to: null,
+  //     __v: 0,
+  //   },
+  //   {
+  //     _id: '640d5c33b5cc39335840a3ee',
+  //     accession_number: 1245,
+  //     student_id: '63db3b261f1b94e1eabe8bbb',
+  //     issued_on: '12/03/2023',
+  //     return_by: '19/03/2023',
+  //     returned_on: null,
+  //     returned_to: null,
+  //     __v: 0,
+  //   },
+  //   {
+  //     _id: '640d5c9eb5cc39335840a41d',
+  //     accession_number: 182,
+  //     student_id: '63db3b261f1b94e1eabe8bbb',
+  //     issued_on: '12/03/2023',
+  //     return_by: '19/03/2023',
+  //     returned_on: '2023-03-12T05:03:07.816Z',
+  //     returned_to: '63dfa7370c0497cc25ed3ff8',
+  //     __v: 0,
+  //   },
+  //   {
+  //     _id: '640d5de7b5cc39335840a467',
+  //     accession_number: 182,
+  //     student_id: '63db3b261f1b94e1eabe8bbb',
+  //     issued_on: '12/03/2023',
+  //     return_by: '19/03/2023',
+  //     returned_on: null,
+  //     returned_to: null,
+  //     __v: 0,
+  //   },
+  //   {
+  //     _id: '640d5debb5cc39335840a472',
+  //     accession_number: 1,
+  //     student_id: '63db3b261f1b94e1eabe8bbb',
+  //     issued_on: '12/03/2023',
+  //     return_by: '19/03/2023',
+  //     returned_on: '2023-03-12T05:29:06.602Z',
+  //     returned_to: '63dfa7370c0497cc25ed3ff8',
+  //     __v: 0,
+  //   },
+  //   {
+  //     _id: '640d5df1b5cc39335840a47d',
+  //     accession_number: 4,
+  //     student_id: '63db3b261f1b94e1eabe8bbb',
+  //     issued_on: '12/03/2023',
+  //     return_by: '19/03/2023',
+  //     returned_on: '2023-03-12T05:09:41.071Z',
+  //     returned_to: '63dfa7370c0497cc25ed3ff8',
+  //     __v: 0,
+  //   },
+  //   {
+  //     _id: '640d5dfab5cc39335840a488',
+  //     accession_number: 5,
+  //     student_id: '63db3b261f1b94e1eabe8bbb',
+  //     issued_on: '12/03/2023',
+  //     return_by: '19/03/2023',
+  //     returned_on: '2023-03-12T05:30:09.835Z',
+  //     returned_to: '63dfa7370c0497cc25ed3ff8',
+  //     __v: 0,
+  //   },
+  //   {
+  //     _id: '640d5dffb5cc39335840a493',
+  //     accession_number: 6,
+  //     student_id: '63db3b261f1b94e1eabe8bbb',
+  //     issued_on: '12/03/2023',
+  //     return_by: '19/03/2023',
+  //     returned_on: '2023-03-12T05:09:51.092Z',
+  //     returned_to: '63dfa7370c0497cc25ed3ff8',
+  //     __v: 0,
+  //   },
+  //   {
+  //     _id: '640d5f53b5cc39335840a4b6',
+  //     accession_number: 1245,
+  //     student_id: '63db3b261f1b94e1eabe8bbb',
+  //     issued_on: '12/03/2023',
+  //     return_by: '19/03/2023',
+  //     returned_on: null,
+  //     returned_to: null,
+  //     __v: 0,
+  //   },
+  //   {
+  //     _id: '640d5fe2b5cc39335840a4d5',
+  //     accession_number: 1,
+  //     student_id: '63db3b261f1b94e1eabe8bbb',
+  //     issued_on: '12/03/2023',
+  //     return_by: '19/03/2023',
+  //     returned_on: null,
+  //     returned_to: null,
+  //     __v: 0,
+  //   },
+  //   {
+  //     _id: '640d6018b5cc39335840a4f4',
+  //     accession_number: 17,
+  //     student_id: '63db3b261f1b94e1eabe8bbb',
+  //     issued_on: '12/03/2023',
+  //     return_by: '19/03/2023',
+  //     returned_on: '2023-03-12T05:21:57.873Z',
+  //     returned_to: '63dfa7370c0497cc25ed3ff8',
+  //     __v: 0,
+  //   },
+  //   {
+  //     _id: '640d601fb5cc39335840a4ff',
+  //     accession_number: 19,
+  //     student_id: '63db3b261f1b94e1eabe8bbb',
+  //     issued_on: '12/03/2023',
+  //     return_by: '19/03/2023',
+  //     returned_on: null,
+  //     returned_to: null,
+  //     __v: 0,
+  //   },
+  //   {
+  //     _id: '640d6024b5cc39335840a50a',
+  //     accession_number: 26,
+  //     student_id: '63db3b261f1b94e1eabe8bbb',
+  //     issued_on: '12/03/2023',
+  //     return_by: '19/03/2023',
+  //     returned_on: '2023-03-12T05:21:44.426Z',
+  //     returned_to: '63dfa7370c0497cc25ed3ff8',
+  //     __v: 0,
+  //   },
+  //   {
+  //     _id: '640d7350b5cc39335840a557',
+  //     accession_number: 1245,
+  //     student_id: '63db3b261f1b94e1eabe8bbb',
+  //     issued_on: '12/03/2023',
+  //     return_by: '19/03/2023',
+  //     returned_on: null,
+  //     returned_to: null,
+  //     __v: 0,
+  //   },
+  //   {
+  //     _id: '640d82e3b5cc39335840a6e5',
+  //     accession_number: 1,
+  //     student_id: '63db3b261f1b94e1eabe8bbb',
+  //     issued_on: '12/03/2023',
+  //     return_by: '19/03/2023',
+  //     returned_on: null,
+  //     returned_to: null,
+  //     __v: 0,
+  //   },
+  // ]);
 
   const [filterName, setFilterName] = useState('');
 

@@ -50,11 +50,11 @@ const SERVICE_OPTIONS = ['all', 'First Year', 'Comps', 'IT', 'EXTC'];
 
 const TABLE_HEAD = [
   { id: 'accessionNumber', label: 'Book', align: 'left' },
-  { id: 'issueDate', label: 'Issue Date', align: 'left' },
-  { id: 'dueDate', label: 'Due Date', align: 'left' },
+  { id: 'issueDate', label: 'Issue Date', align: 'center' },
+  { id: 'dueDate', label: 'Due Date', align: 'center' },
   { id: 'returnDate', label: 'Return Date', align: 'center', width: 140 },
   { id: 'fine', label: 'Fine', align: 'center', width: 140 },
-  { id: 'status', label: 'Status', align: 'left' },
+  // { id: 'status', label: 'Status', align: 'left' },
   { id: '' },
 ];
 
@@ -300,7 +300,7 @@ export default function InvoiceList() {
       __v: 0,
     },
   ]);
-
+  
   const [filterName, setFilterName] = useState('');
 
   const [filterService, setFilterService] = useState('all');
@@ -400,10 +400,10 @@ export default function InvoiceList() {
     <Page title="User: Issued Books">
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <HeaderBreadcrumbs
-          heading="Invoice List"
+          heading="Issued List"
           links={[
             { name: 'Dashboard', href: PATH_APP.root },
-            { name: 'Invoices', href: PATH_APP.user.issued },
+            { name: 'Issued', href: PATH_APP.user.issued },
             { name: 'List' },
           ]}
           // action={

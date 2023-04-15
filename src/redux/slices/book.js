@@ -5,6 +5,7 @@ import axios from '../../utils/axios';
 //
 import { dispatch } from '../store';
 
+
 // ----------------------------------------------------------------------
 
 const initialState = {
@@ -104,6 +105,39 @@ export function issueBookbyuser(acno, id, token) {
       );
       console.log(response.data);
       dispatch(slice.actions.issueBooks());
+    } catch (error) {
+      console.log(error);
+      dispatch(slice.actions.hasError(error));
+    }
+  };
+}
+
+// ----------------------------------------------------------------------
+
+export function authStudentbyadmin(id,token) {
+  // console.log(`accession no to issue ${acno}`);
+  const bod =[
+    {
+        "email": id.toString()
+    }
+]
+  return async () => {
+    dispatch(slice.actions.startLoading());
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_HOST_API_KEY_ADMIN}/student/create-bulk-students`,
+        {
+          bod
+        },
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+            'Content-type': 'application/json',
+          },
+        }
+      );
+      console.log(response.data);
+      dispatch(slice.actions.getIssuedBooksData(response.data));
     } catch (error) {
       console.log(error);
       dispatch(slice.actions.hasError(error));
