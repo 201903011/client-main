@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useSnackbar } from 'notistack';
 import * as Yup from 'yup';
 import { Link as RouterLink } from 'react-router-dom';
 // form
@@ -60,6 +61,8 @@ const selectedEventSelector = (state) => {
 };
 
 export default function BookIssue() {
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+
   const dispatch = useDispatch();
 
   const [page, setPage] = useState(1);
@@ -93,6 +96,7 @@ export default function BookIssue() {
       const accessToken = window.localStorage.getItem('accessToken');
       console.log(typeof parseInt(data.accessionNo.toString(), 10), typeof user._id, typeof accessToken);
       dispatch(issueBookbyuser(parseInt(data.accessionNo.toString(), 10), user._id.toString(), accessToken.toString()));
+      enqueueSnackbar('Book is issued successfully!');
     } catch (error) {
       console.error(error);
       reset();
