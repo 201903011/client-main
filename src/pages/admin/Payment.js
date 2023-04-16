@@ -1,5 +1,5 @@
 import sumBy from 'lodash/sumBy';
-import { useState , useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import moment from 'moment/moment';
 import { differenceInBusinessDays } from 'date-fns';
@@ -86,18 +86,15 @@ const selectedEventSelector = (state) => {
 };
 
 export default function InvoiceList() {
-
-  
   const dispatch = useDispatch();
 
-  const tableData1 = useSelector(selectedEventSelector);
-  
-  console.log("dispatch");
+  console.log('dispatch');
   useEffect(() => {
     const accessToken = window.localStorage.getItem('accessToken');
-    dispatch(getEvents(accessToken.toString()));  
-    
+    dispatch(getEvents(accessToken.toString()));
   }, [dispatch]);
+
+  const tableData = useSelector(selectedEventSelector);
 
   const theme = useTheme();
 
@@ -125,7 +122,7 @@ export default function InvoiceList() {
   } = useTable({ defaultOrderBy: 'createDate' });
 
   console.log(_invoices[0].createDate);
-  const [tableData, setTableData] = useState(tableData1);
+  // const [tableData, setTableData] = useState(tableData1);
 
   const [filterName, setFilterName] = useState('');
 
@@ -149,13 +146,13 @@ export default function InvoiceList() {
   const handleDeleteRow = (id) => {
     const deleteRow = tableData.filter((row) => row.id !== id);
     setSelected([]);
-    setTableData(deleteRow);
+    // setTableData(deleteRow);
   };
 
   const handleDeleteRows = (selected) => {
     const deleteRows = tableData.filter((row) => !selected.includes(row.id));
     setSelected([]);
-    setTableData(deleteRows);
+    // setTableData(deleteRows);
   };
 
   const handleEditRow = (id) => {

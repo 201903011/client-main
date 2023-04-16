@@ -1,5 +1,5 @@
 import sumBy from 'lodash/sumBy';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import moment from 'moment/moment';
 import { differenceInBusinessDays } from 'date-fns';
@@ -23,12 +23,16 @@ import {
   TablePagination,
   FormControlLabel,
 } from '@mui/material';
+// redux
+import { useDispatch, useSelector } from '../../redux/store';
+import { getIssueBookslist } from '../../redux/slices/book';
 // routes
 import { PATH_APP } from '../../routes/paths';
 // hooks
 import useTabs from '../../hooks/useTabs';
 import useSettings from '../../hooks/useSettings';
 import useTable, { getComparator, emptyRows } from '../../hooks/useTable';
+import useAuth from '../../hooks/useAuth';
 // _mock_
 import { _invoices } from '../../_mock';
 // components
@@ -70,8 +74,28 @@ const TABLE_HEAD = [
 //   "returned_to": null,
 //   "__v": 0
 // }
+const selectedEventSelector = (state) => {
+  console.log(state);
+  const { issuedData } = state.book;
+  if (issuedData != null) {
+    return issuedData;
+  }
+  return [];
+};
 
 export default function InvoiceList() {
+  const dispatch = useDispatch();
+
+  const { user } = useAuth();
+
+  useEffect(() => {
+    const accessToken = window.localStorage.getItem('accessToken');
+    dispatch(getIssueBookslist(user._id.toString(), accessToken.toString()));
+  }, [dispatch]);
+
+  const tableData = useSelector(selectedEventSelector);
+  console.log(tableData);
+
   const theme = useTheme();
 
   const { themeStretch } = useSettings();
@@ -98,209 +122,8 @@ export default function InvoiceList() {
   } = useTable({ defaultOrderBy: 'createDate' });
 
   console.log(_invoices[0].createDate);
-  const [tableData, setTableData] = useState([
-    {
-      _id: '640c383947166ea3b54ac597',
-      accession_number: 18,
-      student_id: '63db3b261f1b94e1eabe8bbb',
-      issued_on: '11/03/2023',
-      return_by: '18/03/2023',
-      returned_on: null,
-      returned_to: null,
-      __v: 0,
-    },
-    {
-      _id: '640c3c54f4cd114a30eee04a',
-      accession_number: 1245,
-      student_id: '63db3b261f1b94e1eabe8bbb',
-      issued_on: '11/03/2023',
-      return_by: '18/03/2023',
-      returned_on: '2023-03-12T04:54:44.544Z',
-      returned_to: '63dfa7370c0497cc25ed3ff8',
-      __v: 0,
-    },
-    {
-      _id: '640d5b3ab5cc39335840a35c',
-      accession_number: 1245,
-      student_id: '63db3b261f1b94e1eabe8bbb',
-      issued_on: '12/03/2023',
-      return_by: '19/03/2023',
-      returned_on: '2023-03-12T05:28:56.682Z',
-      returned_to: '63dfa7370c0497cc25ed3ff8',
-      __v: 0,
-    },
-    {
-      _id: '640d5bdab5cc39335840a3a0',
-      accession_number: 1245,
-      student_id: '63db3b261f1b94e1eabe8bbb',
-      issued_on: '12/03/2023',
-      return_by: '19/03/2023',
-      returned_on: null,
-      returned_to: null,
-      __v: 0,
-    },
-    {
-      _id: '640d5be4b5cc39335840a3ab',
-      accession_number: 1245,
-      student_id: '63db3b261f1b94e1eabe8bbb',
-      issued_on: '12/03/2023',
-      return_by: '19/03/2023',
-      returned_on: null,
-      returned_to: null,
-      __v: 0,
-    },
-    {
-      _id: '640d5beab5cc39335840a3b6',
-      accession_number: 1245,
-      student_id: '63db3b261f1b94e1eabe8bbb',
-      issued_on: '12/03/2023',
-      return_by: '19/03/2023',
-      returned_on: null,
-      returned_to: null,
-      __v: 0,
-    },
-    {
-      _id: '640d5c33b5cc39335840a3ee',
-      accession_number: 1245,
-      student_id: '63db3b261f1b94e1eabe8bbb',
-      issued_on: '12/03/2023',
-      return_by: '19/03/2023',
-      returned_on: null,
-      returned_to: null,
-      __v: 0,
-    },
-    {
-      _id: '640d5c9eb5cc39335840a41d',
-      accession_number: 182,
-      student_id: '63db3b261f1b94e1eabe8bbb',
-      issued_on: '12/03/2023',
-      return_by: '19/03/2023',
-      returned_on: '2023-03-12T05:03:07.816Z',
-      returned_to: '63dfa7370c0497cc25ed3ff8',
-      __v: 0,
-    },
-    {
-      _id: '640d5de7b5cc39335840a467',
-      accession_number: 182,
-      student_id: '63db3b261f1b94e1eabe8bbb',
-      issued_on: '12/03/2023',
-      return_by: '19/03/2023',
-      returned_on: null,
-      returned_to: null,
-      __v: 0,
-    },
-    {
-      _id: '640d5debb5cc39335840a472',
-      accession_number: 1,
-      student_id: '63db3b261f1b94e1eabe8bbb',
-      issued_on: '12/03/2023',
-      return_by: '19/03/2023',
-      returned_on: '2023-03-12T05:29:06.602Z',
-      returned_to: '63dfa7370c0497cc25ed3ff8',
-      __v: 0,
-    },
-    {
-      _id: '640d5df1b5cc39335840a47d',
-      accession_number: 4,
-      student_id: '63db3b261f1b94e1eabe8bbb',
-      issued_on: '12/03/2023',
-      return_by: '19/03/2023',
-      returned_on: '2023-03-12T05:09:41.071Z',
-      returned_to: '63dfa7370c0497cc25ed3ff8',
-      __v: 0,
-    },
-    {
-      _id: '640d5dfab5cc39335840a488',
-      accession_number: 5,
-      student_id: '63db3b261f1b94e1eabe8bbb',
-      issued_on: '12/03/2023',
-      return_by: '19/03/2023',
-      returned_on: '2023-03-12T05:30:09.835Z',
-      returned_to: '63dfa7370c0497cc25ed3ff8',
-      __v: 0,
-    },
-    {
-      _id: '640d5dffb5cc39335840a493',
-      accession_number: 6,
-      student_id: '63db3b261f1b94e1eabe8bbb',
-      issued_on: '12/03/2023',
-      return_by: '19/03/2023',
-      returned_on: '2023-03-12T05:09:51.092Z',
-      returned_to: '63dfa7370c0497cc25ed3ff8',
-      __v: 0,
-    },
-    {
-      _id: '640d5f53b5cc39335840a4b6',
-      accession_number: 1245,
-      student_id: '63db3b261f1b94e1eabe8bbb',
-      issued_on: '12/03/2023',
-      return_by: '19/03/2023',
-      returned_on: null,
-      returned_to: null,
-      __v: 0,
-    },
-    {
-      _id: '640d5fe2b5cc39335840a4d5',
-      accession_number: 1,
-      student_id: '63db3b261f1b94e1eabe8bbb',
-      issued_on: '12/03/2023',
-      return_by: '19/03/2023',
-      returned_on: null,
-      returned_to: null,
-      __v: 0,
-    },
-    {
-      _id: '640d6018b5cc39335840a4f4',
-      accession_number: 17,
-      student_id: '63db3b261f1b94e1eabe8bbb',
-      issued_on: '12/03/2023',
-      return_by: '19/03/2023',
-      returned_on: '2023-03-12T05:21:57.873Z',
-      returned_to: '63dfa7370c0497cc25ed3ff8',
-      __v: 0,
-    },
-    {
-      _id: '640d601fb5cc39335840a4ff',
-      accession_number: 19,
-      student_id: '63db3b261f1b94e1eabe8bbb',
-      issued_on: '12/03/2023',
-      return_by: '19/03/2023',
-      returned_on: null,
-      returned_to: null,
-      __v: 0,
-    },
-    {
-      _id: '640d6024b5cc39335840a50a',
-      accession_number: 26,
-      student_id: '63db3b261f1b94e1eabe8bbb',
-      issued_on: '12/03/2023',
-      return_by: '19/03/2023',
-      returned_on: '2023-03-12T05:21:44.426Z',
-      returned_to: '63dfa7370c0497cc25ed3ff8',
-      __v: 0,
-    },
-    {
-      _id: '640d7350b5cc39335840a557',
-      accession_number: 1245,
-      student_id: '63db3b261f1b94e1eabe8bbb',
-      issued_on: '12/03/2023',
-      return_by: '19/03/2023',
-      returned_on: null,
-      returned_to: null,
-      __v: 0,
-    },
-    {
-      _id: '640d82e3b5cc39335840a6e5',
-      accession_number: 1,
-      student_id: '63db3b261f1b94e1eabe8bbb',
-      issued_on: '12/03/2023',
-      return_by: '19/03/2023',
-      returned_on: null,
-      returned_to: null,
-      __v: 0,
-    },
-  ]);
-  
+  // const [tableData, setTableData] = useState(useSelector(selectedEventSelector));
+
   const [filterName, setFilterName] = useState('');
 
   const [filterService, setFilterService] = useState('all');
@@ -323,13 +146,13 @@ export default function InvoiceList() {
   const handleDeleteRow = (id) => {
     const deleteRow = tableData.filter((row) => row.id !== id);
     setSelected([]);
-    setTableData(deleteRow);
+    // setTableData(deleteRow);
   };
 
   const handleDeleteRows = (selected) => {
     const deleteRows = tableData.filter((row) => !selected.includes(row.id));
     setSelected([]);
-    setTableData(deleteRows);
+    // setTableData(deleteRows);
   };
 
   const handleEditRow = (id) => {
@@ -378,23 +201,18 @@ export default function InvoiceList() {
 
   const CalculateStatus = (item) => {
     // if(returnDate != null  ){
-        
     // }
     // const issuedDate = new Date(moment(item.issued_on, 'DD/MM/YYYY').toDate().toISOString());
     // const returnDate = item.returned_on.toISOString().getTime();
     // const dueDate = new Date(moment(item.return_by, 'DD/MM/YYYY').toDate().toISOString());
-    
     // if(differenceInBusinessDays(dueDate,returnDate) > 0 ){
     //   return 'overdue' ;
     // }
     // else{
     //   if(returnDate == null ){
-
     //   }
     // }
-    
-  }
-
+  };
 
   return (
     <Page title="User: Issued Books">

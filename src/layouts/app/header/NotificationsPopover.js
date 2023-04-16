@@ -29,42 +29,38 @@ import { IconButtonAnimate } from '../../../components/animate';
 // ----------------------------------------------------------------------
 
 export default function NotificationsPopover() {
-
   const notif = [
     {
-      id: 1245,
+      id: '1245',
       title: 'Your book is return',
-      description: 
-        'Book with accession no 1245 is return',
-       
+      description: 'Book with accession no 1245 is return',
+
       avatar: null,
       type: 'order_placed',
       createdAt: _notifications[0].createdAt,
       isUnRead: true,
     },
     {
-      id: 1246,
+      id: '1246',
       title: 'Your order is issued',
-      description: 
-      'Book with accession no 1245 is issued',
-       
+      description: 'Book with accession no 1245 is issued',
+
       avatar: null,
       type: 'order_placed',
       createdAt: _notifications[0].createdAt,
       isUnRead: true,
     },
     {
-      id: 1246,
+      id: '1246',
       title: 'Your order is issued',
-      description: 
-      'Book with accession no 18 is issued',
-       
+      description: 'Book with accession no 18 is issued',
+
       avatar: null,
       type: 'order_placed',
       createdAt: _notifications[0].createdAt,
       isUnRead: true,
     },
-  ]
+  ];
   // console.log(_notifications[0].createdAt);
   const [notifications, setNotifications] = useState(notif);
 

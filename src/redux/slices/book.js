@@ -5,7 +5,6 @@ import axios from '../../utils/axios';
 //
 import { dispatch } from '../store';
 
-
 // ----------------------------------------------------------------------
 
 const initialState = {
@@ -114,20 +113,20 @@ export function issueBookbyuser(acno, id, token) {
 
 // ----------------------------------------------------------------------
 
-export function authStudentbyadmin(id,token) {
+export function authStudentbyadmin(id, token) {
   // console.log(`accession no to issue ${acno}`);
-  const bod =[
+  const bod = [
     {
-        "email": id.toString()
-    }
-]
+      email: id.toString(),
+    },
+  ];
   return async () => {
     dispatch(slice.actions.startLoading());
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_HOST_API_KEY_ADMIN}/student/create-bulk-students`,
         {
-          bod
+          bod,
         },
         {
           headers: {
@@ -177,7 +176,7 @@ export function returnBookbyadmin(acno, id, token) {
 // ----------------------------------------------------------------------
 
 export function getIssueBookslist(id, token) {
-  // console.log(`accession no to issue ${acno}`);
+  console.log(`get issue list`);
   return async () => {
     dispatch(slice.actions.startLoading());
     try {
@@ -193,7 +192,7 @@ export function getIssueBookslist(id, token) {
           },
         }
       );
-      // console.log(typeof response.data.data);
+      console.log(response.data.data);
       dispatch(slice.actions.getIssuedBooksData(response.data.data));
     } catch (error) {
       console.log(error);
